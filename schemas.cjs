@@ -1,25 +1,146 @@
-import * as core from "../core/index.js";
-import { util } from "../core/index.js";
-import * as processors from "../core/json-schema-processors.js";
-import { createStandardJSONSchemaMethod, createToJSONSchemaMethod } from "../core/to-json-schema.js";
-import * as checks from "./checks.js";
-import * as iso from "./iso.js";
-import * as parse from "./parse.js";
-export const ZodType = /*@__PURE__*/ core.$constructor("ZodType", (inst, def) => {
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ZodLiteral = exports.ZodEnum = exports.ZodSet = exports.ZodMap = exports.ZodRecord = exports.ZodTuple = exports.ZodIntersection = exports.ZodDiscriminatedUnion = exports.ZodXor = exports.ZodUnion = exports.ZodObject = exports.ZodArray = exports.ZodDate = exports.ZodVoid = exports.ZodNever = exports.ZodUnknown = exports.ZodAny = exports.ZodNull = exports.ZodUndefined = exports.ZodSymbol = exports.ZodBigIntFormat = exports.ZodBigInt = exports.ZodBoolean = exports.ZodNumberFormat = exports.ZodNumber = exports.ZodCustomStringFormat = exports.ZodJWT = exports.ZodE164 = exports.ZodBase64URL = exports.ZodBase64 = exports.ZodCIDRv6 = exports.ZodCIDRv4 = exports.ZodIPv6 = exports.ZodMAC = exports.ZodIPv4 = exports.ZodKSUID = exports.ZodXID = exports.ZodULID = exports.ZodCUID2 = exports.ZodCUID = exports.ZodNanoID = exports.ZodEmoji = exports.ZodURL = exports.ZodUUID = exports.ZodGUID = exports.ZodEmail = exports.ZodStringFormat = exports.ZodString = exports._ZodString = exports.ZodType = void 0;
+exports.stringbool = exports.meta = exports.describe = exports.ZodCustom = exports.ZodFunction = exports.ZodPromise = exports.ZodLazy = exports.ZodTemplateLiteral = exports.ZodReadonly = exports.ZodCodec = exports.ZodPipe = exports.ZodNaN = exports.ZodCatch = exports.ZodSuccess = exports.ZodNonOptional = exports.ZodPrefault = exports.ZodDefault = exports.ZodNullable = exports.ZodExactOptional = exports.ZodOptional = exports.ZodTransform = exports.ZodFile = void 0;
+exports.string = string;
+exports.email = email;
+exports.guid = guid;
+exports.uuid = uuid;
+exports.uuidv4 = uuidv4;
+exports.uuidv6 = uuidv6;
+exports.uuidv7 = uuidv7;
+exports.url = url;
+exports.httpUrl = httpUrl;
+exports.emoji = emoji;
+exports.nanoid = nanoid;
+exports.cuid = cuid;
+exports.cuid2 = cuid2;
+exports.ulid = ulid;
+exports.xid = xid;
+exports.ksuid = ksuid;
+exports.ipv4 = ipv4;
+exports.mac = mac;
+exports.ipv6 = ipv6;
+exports.cidrv4 = cidrv4;
+exports.cidrv6 = cidrv6;
+exports.base64 = base64;
+exports.base64url = base64url;
+exports.e164 = e164;
+exports.jwt = jwt;
+exports.stringFormat = stringFormat;
+exports.hostname = hostname;
+exports.hex = hex;
+exports.hash = hash;
+exports.number = number;
+exports.int = int;
+exports.float32 = float32;
+exports.float64 = float64;
+exports.int32 = int32;
+exports.uint32 = uint32;
+exports.boolean = boolean;
+exports.bigint = bigint;
+exports.int64 = int64;
+exports.uint64 = uint64;
+exports.symbol = symbol;
+exports.undefined = _undefined;
+exports.null = _null;
+exports.any = any;
+exports.unknown = unknown;
+exports.never = never;
+exports.void = _void;
+exports.date = date;
+exports.array = array;
+exports.keyof = keyof;
+exports.object = object;
+exports.strictObject = strictObject;
+exports.looseObject = looseObject;
+exports.union = union;
+exports.xor = xor;
+exports.discriminatedUnion = discriminatedUnion;
+exports.intersection = intersection;
+exports.tuple = tuple;
+exports.record = record;
+exports.partialRecord = partialRecord;
+exports.looseRecord = looseRecord;
+exports.map = map;
+exports.set = set;
+exports.enum = _enum;
+exports.nativeEnum = nativeEnum;
+exports.literal = literal;
+exports.file = file;
+exports.transform = transform;
+exports.optional = optional;
+exports.exactOptional = exactOptional;
+exports.nullable = nullable;
+exports.nullish = nullish;
+exports._default = _default;
+exports.prefault = prefault;
+exports.nonoptional = nonoptional;
+exports.success = success;
+exports.catch = _catch;
+exports.nan = nan;
+exports.pipe = pipe;
+exports.codec = codec;
+exports.readonly = readonly;
+exports.templateLiteral = templateLiteral;
+exports.lazy = lazy;
+exports.promise = promise;
+exports._function = _function;
+exports.function = _function;
+exports._function = _function;
+exports.function = _function;
+exports.check = check;
+exports.custom = custom;
+exports.refine = refine;
+exports.superRefine = superRefine;
+exports.instanceof = _instanceof;
+exports.json = json;
+exports.preprocess = preprocess;
+const core = __importStar(require("../core/index.cjs"));
+const index_js_1 = require("../core/index.cjs");
+const processors = __importStar(require("../core/json-schema-processors.cjs"));
+const to_json_schema_js_1 = require("../core/to-json-schema.cjs");
+const checks = __importStar(require("./checks.cjs"));
+const iso = __importStar(require("./iso.cjs"));
+const parse = __importStar(require("./parse.cjs"));
+exports.ZodType = core.$constructor("ZodType", (inst, def) => {
     core.$ZodType.init(inst, def);
     Object.assign(inst["~standard"], {
         jsonSchema: {
-            input: createStandardJSONSchemaMethod(inst, "input"),
-            output: createStandardJSONSchemaMethod(inst, "output"),
+            input: (0, to_json_schema_js_1.createStandardJSONSchemaMethod)(inst, "input"),
+            output: (0, to_json_schema_js_1.createStandardJSONSchemaMethod)(inst, "output"),
         },
     });
-    inst.toJSONSchema = createToJSONSchemaMethod(inst, {});
+    inst.toJSONSchema = (0, to_json_schema_js_1.createToJSONSchemaMethod)(inst, {});
     inst.def = def;
     inst.type = def.type;
     Object.defineProperty(inst, "_def", { value: def });
     // base methods
     inst.check = (...checks) => {
-        return inst.clone(util.mergeDefs(def, {
+        return inst.clone(index_js_1.util.mergeDefs(def, {
             checks: [
                 ...(def.checks ?? []),
                 ...checks.map((ch) => typeof ch === "function" ? { _zod: { check: ch, def: { check: "custom" }, onattach: [] } } : ch),
@@ -97,9 +218,9 @@ export const ZodType = /*@__PURE__*/ core.$constructor("ZodType", (inst, def) =>
     return inst;
 });
 /** @internal */
-export const _ZodString = /*@__PURE__*/ core.$constructor("_ZodString", (inst, def) => {
+exports._ZodString = core.$constructor("_ZodString", (inst, def) => {
     core.$ZodString.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.stringProcessor(inst, ctx, json, params);
     const bag = inst._zod.bag;
     inst.format = bag.format ?? null;
@@ -123,246 +244,246 @@ export const _ZodString = /*@__PURE__*/ core.$constructor("_ZodString", (inst, d
     inst.toUpperCase = () => inst.check(checks.toUpperCase());
     inst.slugify = () => inst.check(checks.slugify());
 });
-export const ZodString = /*@__PURE__*/ core.$constructor("ZodString", (inst, def) => {
+exports.ZodString = core.$constructor("ZodString", (inst, def) => {
     core.$ZodString.init(inst, def);
-    _ZodString.init(inst, def);
-    inst.email = (params) => inst.check(core._email(ZodEmail, params));
-    inst.url = (params) => inst.check(core._url(ZodURL, params));
-    inst.jwt = (params) => inst.check(core._jwt(ZodJWT, params));
-    inst.emoji = (params) => inst.check(core._emoji(ZodEmoji, params));
-    inst.guid = (params) => inst.check(core._guid(ZodGUID, params));
-    inst.uuid = (params) => inst.check(core._uuid(ZodUUID, params));
-    inst.uuidv4 = (params) => inst.check(core._uuidv4(ZodUUID, params));
-    inst.uuidv6 = (params) => inst.check(core._uuidv6(ZodUUID, params));
-    inst.uuidv7 = (params) => inst.check(core._uuidv7(ZodUUID, params));
-    inst.nanoid = (params) => inst.check(core._nanoid(ZodNanoID, params));
-    inst.guid = (params) => inst.check(core._guid(ZodGUID, params));
-    inst.cuid = (params) => inst.check(core._cuid(ZodCUID, params));
-    inst.cuid2 = (params) => inst.check(core._cuid2(ZodCUID2, params));
-    inst.ulid = (params) => inst.check(core._ulid(ZodULID, params));
-    inst.base64 = (params) => inst.check(core._base64(ZodBase64, params));
-    inst.base64url = (params) => inst.check(core._base64url(ZodBase64URL, params));
-    inst.xid = (params) => inst.check(core._xid(ZodXID, params));
-    inst.ksuid = (params) => inst.check(core._ksuid(ZodKSUID, params));
-    inst.ipv4 = (params) => inst.check(core._ipv4(ZodIPv4, params));
-    inst.ipv6 = (params) => inst.check(core._ipv6(ZodIPv6, params));
-    inst.cidrv4 = (params) => inst.check(core._cidrv4(ZodCIDRv4, params));
-    inst.cidrv6 = (params) => inst.check(core._cidrv6(ZodCIDRv6, params));
-    inst.e164 = (params) => inst.check(core._e164(ZodE164, params));
+    exports._ZodString.init(inst, def);
+    inst.email = (params) => inst.check(core._email(exports.ZodEmail, params));
+    inst.url = (params) => inst.check(core._url(exports.ZodURL, params));
+    inst.jwt = (params) => inst.check(core._jwt(exports.ZodJWT, params));
+    inst.emoji = (params) => inst.check(core._emoji(exports.ZodEmoji, params));
+    inst.guid = (params) => inst.check(core._guid(exports.ZodGUID, params));
+    inst.uuid = (params) => inst.check(core._uuid(exports.ZodUUID, params));
+    inst.uuidv4 = (params) => inst.check(core._uuidv4(exports.ZodUUID, params));
+    inst.uuidv6 = (params) => inst.check(core._uuidv6(exports.ZodUUID, params));
+    inst.uuidv7 = (params) => inst.check(core._uuidv7(exports.ZodUUID, params));
+    inst.nanoid = (params) => inst.check(core._nanoid(exports.ZodNanoID, params));
+    inst.guid = (params) => inst.check(core._guid(exports.ZodGUID, params));
+    inst.cuid = (params) => inst.check(core._cuid(exports.ZodCUID, params));
+    inst.cuid2 = (params) => inst.check(core._cuid2(exports.ZodCUID2, params));
+    inst.ulid = (params) => inst.check(core._ulid(exports.ZodULID, params));
+    inst.base64 = (params) => inst.check(core._base64(exports.ZodBase64, params));
+    inst.base64url = (params) => inst.check(core._base64url(exports.ZodBase64URL, params));
+    inst.xid = (params) => inst.check(core._xid(exports.ZodXID, params));
+    inst.ksuid = (params) => inst.check(core._ksuid(exports.ZodKSUID, params));
+    inst.ipv4 = (params) => inst.check(core._ipv4(exports.ZodIPv4, params));
+    inst.ipv6 = (params) => inst.check(core._ipv6(exports.ZodIPv6, params));
+    inst.cidrv4 = (params) => inst.check(core._cidrv4(exports.ZodCIDRv4, params));
+    inst.cidrv6 = (params) => inst.check(core._cidrv6(exports.ZodCIDRv6, params));
+    inst.e164 = (params) => inst.check(core._e164(exports.ZodE164, params));
     // iso
     inst.datetime = (params) => inst.check(iso.datetime(params));
     inst.date = (params) => inst.check(iso.date(params));
     inst.time = (params) => inst.check(iso.time(params));
     inst.duration = (params) => inst.check(iso.duration(params));
 });
-export function string(params) {
-    return core._string(ZodString, params);
+function string(params) {
+    return core._string(exports.ZodString, params);
 }
-export const ZodStringFormat = /*@__PURE__*/ core.$constructor("ZodStringFormat", (inst, def) => {
+exports.ZodStringFormat = core.$constructor("ZodStringFormat", (inst, def) => {
     core.$ZodStringFormat.init(inst, def);
-    _ZodString.init(inst, def);
+    exports._ZodString.init(inst, def);
 });
-export const ZodEmail = /*@__PURE__*/ core.$constructor("ZodEmail", (inst, def) => {
+exports.ZodEmail = core.$constructor("ZodEmail", (inst, def) => {
     // ZodStringFormat.init(inst, def);
     core.$ZodEmail.init(inst, def);
-    ZodStringFormat.init(inst, def);
+    exports.ZodStringFormat.init(inst, def);
 });
-export function email(params) {
-    return core._email(ZodEmail, params);
+function email(params) {
+    return core._email(exports.ZodEmail, params);
 }
-export const ZodGUID = /*@__PURE__*/ core.$constructor("ZodGUID", (inst, def) => {
+exports.ZodGUID = core.$constructor("ZodGUID", (inst, def) => {
     // ZodStringFormat.init(inst, def);
     core.$ZodGUID.init(inst, def);
-    ZodStringFormat.init(inst, def);
+    exports.ZodStringFormat.init(inst, def);
 });
-export function guid(params) {
-    return core._guid(ZodGUID, params);
+function guid(params) {
+    return core._guid(exports.ZodGUID, params);
 }
-export const ZodUUID = /*@__PURE__*/ core.$constructor("ZodUUID", (inst, def) => {
+exports.ZodUUID = core.$constructor("ZodUUID", (inst, def) => {
     // ZodStringFormat.init(inst, def);
     core.$ZodUUID.init(inst, def);
-    ZodStringFormat.init(inst, def);
+    exports.ZodStringFormat.init(inst, def);
 });
-export function uuid(params) {
-    return core._uuid(ZodUUID, params);
+function uuid(params) {
+    return core._uuid(exports.ZodUUID, params);
 }
-export function uuidv4(params) {
-    return core._uuidv4(ZodUUID, params);
+function uuidv4(params) {
+    return core._uuidv4(exports.ZodUUID, params);
 }
 // ZodUUIDv6
-export function uuidv6(params) {
-    return core._uuidv6(ZodUUID, params);
+function uuidv6(params) {
+    return core._uuidv6(exports.ZodUUID, params);
 }
 // ZodUUIDv7
-export function uuidv7(params) {
-    return core._uuidv7(ZodUUID, params);
+function uuidv7(params) {
+    return core._uuidv7(exports.ZodUUID, params);
 }
-export const ZodURL = /*@__PURE__*/ core.$constructor("ZodURL", (inst, def) => {
+exports.ZodURL = core.$constructor("ZodURL", (inst, def) => {
     // ZodStringFormat.init(inst, def);
     core.$ZodURL.init(inst, def);
-    ZodStringFormat.init(inst, def);
+    exports.ZodStringFormat.init(inst, def);
 });
-export function url(params) {
-    return core._url(ZodURL, params);
+function url(params) {
+    return core._url(exports.ZodURL, params);
 }
-export function httpUrl(params) {
-    return core._url(ZodURL, {
+function httpUrl(params) {
+    return core._url(exports.ZodURL, {
         protocol: /^https?$/,
         hostname: core.regexes.domain,
-        ...util.normalizeParams(params),
+        ...index_js_1.util.normalizeParams(params),
     });
 }
-export const ZodEmoji = /*@__PURE__*/ core.$constructor("ZodEmoji", (inst, def) => {
+exports.ZodEmoji = core.$constructor("ZodEmoji", (inst, def) => {
     // ZodStringFormat.init(inst, def);
     core.$ZodEmoji.init(inst, def);
-    ZodStringFormat.init(inst, def);
+    exports.ZodStringFormat.init(inst, def);
 });
-export function emoji(params) {
-    return core._emoji(ZodEmoji, params);
+function emoji(params) {
+    return core._emoji(exports.ZodEmoji, params);
 }
-export const ZodNanoID = /*@__PURE__*/ core.$constructor("ZodNanoID", (inst, def) => {
+exports.ZodNanoID = core.$constructor("ZodNanoID", (inst, def) => {
     // ZodStringFormat.init(inst, def);
     core.$ZodNanoID.init(inst, def);
-    ZodStringFormat.init(inst, def);
+    exports.ZodStringFormat.init(inst, def);
 });
-export function nanoid(params) {
-    return core._nanoid(ZodNanoID, params);
+function nanoid(params) {
+    return core._nanoid(exports.ZodNanoID, params);
 }
-export const ZodCUID = /*@__PURE__*/ core.$constructor("ZodCUID", (inst, def) => {
+exports.ZodCUID = core.$constructor("ZodCUID", (inst, def) => {
     // ZodStringFormat.init(inst, def);
     core.$ZodCUID.init(inst, def);
-    ZodStringFormat.init(inst, def);
+    exports.ZodStringFormat.init(inst, def);
 });
-export function cuid(params) {
-    return core._cuid(ZodCUID, params);
+function cuid(params) {
+    return core._cuid(exports.ZodCUID, params);
 }
-export const ZodCUID2 = /*@__PURE__*/ core.$constructor("ZodCUID2", (inst, def) => {
+exports.ZodCUID2 = core.$constructor("ZodCUID2", (inst, def) => {
     // ZodStringFormat.init(inst, def);
     core.$ZodCUID2.init(inst, def);
-    ZodStringFormat.init(inst, def);
+    exports.ZodStringFormat.init(inst, def);
 });
-export function cuid2(params) {
-    return core._cuid2(ZodCUID2, params);
+function cuid2(params) {
+    return core._cuid2(exports.ZodCUID2, params);
 }
-export const ZodULID = /*@__PURE__*/ core.$constructor("ZodULID", (inst, def) => {
+exports.ZodULID = core.$constructor("ZodULID", (inst, def) => {
     // ZodStringFormat.init(inst, def);
     core.$ZodULID.init(inst, def);
-    ZodStringFormat.init(inst, def);
+    exports.ZodStringFormat.init(inst, def);
 });
-export function ulid(params) {
-    return core._ulid(ZodULID, params);
+function ulid(params) {
+    return core._ulid(exports.ZodULID, params);
 }
-export const ZodXID = /*@__PURE__*/ core.$constructor("ZodXID", (inst, def) => {
+exports.ZodXID = core.$constructor("ZodXID", (inst, def) => {
     // ZodStringFormat.init(inst, def);
     core.$ZodXID.init(inst, def);
-    ZodStringFormat.init(inst, def);
+    exports.ZodStringFormat.init(inst, def);
 });
-export function xid(params) {
-    return core._xid(ZodXID, params);
+function xid(params) {
+    return core._xid(exports.ZodXID, params);
 }
-export const ZodKSUID = /*@__PURE__*/ core.$constructor("ZodKSUID", (inst, def) => {
+exports.ZodKSUID = core.$constructor("ZodKSUID", (inst, def) => {
     // ZodStringFormat.init(inst, def);
     core.$ZodKSUID.init(inst, def);
-    ZodStringFormat.init(inst, def);
+    exports.ZodStringFormat.init(inst, def);
 });
-export function ksuid(params) {
-    return core._ksuid(ZodKSUID, params);
+function ksuid(params) {
+    return core._ksuid(exports.ZodKSUID, params);
 }
-export const ZodIPv4 = /*@__PURE__*/ core.$constructor("ZodIPv4", (inst, def) => {
+exports.ZodIPv4 = core.$constructor("ZodIPv4", (inst, def) => {
     // ZodStringFormat.init(inst, def);
     core.$ZodIPv4.init(inst, def);
-    ZodStringFormat.init(inst, def);
+    exports.ZodStringFormat.init(inst, def);
 });
-export function ipv4(params) {
-    return core._ipv4(ZodIPv4, params);
+function ipv4(params) {
+    return core._ipv4(exports.ZodIPv4, params);
 }
-export const ZodMAC = /*@__PURE__*/ core.$constructor("ZodMAC", (inst, def) => {
+exports.ZodMAC = core.$constructor("ZodMAC", (inst, def) => {
     // ZodStringFormat.init(inst, def);
     core.$ZodMAC.init(inst, def);
-    ZodStringFormat.init(inst, def);
+    exports.ZodStringFormat.init(inst, def);
 });
-export function mac(params) {
-    return core._mac(ZodMAC, params);
+function mac(params) {
+    return core._mac(exports.ZodMAC, params);
 }
-export const ZodIPv6 = /*@__PURE__*/ core.$constructor("ZodIPv6", (inst, def) => {
+exports.ZodIPv6 = core.$constructor("ZodIPv6", (inst, def) => {
     // ZodStringFormat.init(inst, def);
     core.$ZodIPv6.init(inst, def);
-    ZodStringFormat.init(inst, def);
+    exports.ZodStringFormat.init(inst, def);
 });
-export function ipv6(params) {
-    return core._ipv6(ZodIPv6, params);
+function ipv6(params) {
+    return core._ipv6(exports.ZodIPv6, params);
 }
-export const ZodCIDRv4 = /*@__PURE__*/ core.$constructor("ZodCIDRv4", (inst, def) => {
+exports.ZodCIDRv4 = core.$constructor("ZodCIDRv4", (inst, def) => {
     core.$ZodCIDRv4.init(inst, def);
-    ZodStringFormat.init(inst, def);
+    exports.ZodStringFormat.init(inst, def);
 });
-export function cidrv4(params) {
-    return core._cidrv4(ZodCIDRv4, params);
+function cidrv4(params) {
+    return core._cidrv4(exports.ZodCIDRv4, params);
 }
-export const ZodCIDRv6 = /*@__PURE__*/ core.$constructor("ZodCIDRv6", (inst, def) => {
+exports.ZodCIDRv6 = core.$constructor("ZodCIDRv6", (inst, def) => {
     core.$ZodCIDRv6.init(inst, def);
-    ZodStringFormat.init(inst, def);
+    exports.ZodStringFormat.init(inst, def);
 });
-export function cidrv6(params) {
-    return core._cidrv6(ZodCIDRv6, params);
+function cidrv6(params) {
+    return core._cidrv6(exports.ZodCIDRv6, params);
 }
-export const ZodBase64 = /*@__PURE__*/ core.$constructor("ZodBase64", (inst, def) => {
+exports.ZodBase64 = core.$constructor("ZodBase64", (inst, def) => {
     // ZodStringFormat.init(inst, def);
     core.$ZodBase64.init(inst, def);
-    ZodStringFormat.init(inst, def);
+    exports.ZodStringFormat.init(inst, def);
 });
-export function base64(params) {
-    return core._base64(ZodBase64, params);
+function base64(params) {
+    return core._base64(exports.ZodBase64, params);
 }
-export const ZodBase64URL = /*@__PURE__*/ core.$constructor("ZodBase64URL", (inst, def) => {
+exports.ZodBase64URL = core.$constructor("ZodBase64URL", (inst, def) => {
     // ZodStringFormat.init(inst, def);
     core.$ZodBase64URL.init(inst, def);
-    ZodStringFormat.init(inst, def);
+    exports.ZodStringFormat.init(inst, def);
 });
-export function base64url(params) {
-    return core._base64url(ZodBase64URL, params);
+function base64url(params) {
+    return core._base64url(exports.ZodBase64URL, params);
 }
-export const ZodE164 = /*@__PURE__*/ core.$constructor("ZodE164", (inst, def) => {
+exports.ZodE164 = core.$constructor("ZodE164", (inst, def) => {
     // ZodStringFormat.init(inst, def);
     core.$ZodE164.init(inst, def);
-    ZodStringFormat.init(inst, def);
+    exports.ZodStringFormat.init(inst, def);
 });
-export function e164(params) {
-    return core._e164(ZodE164, params);
+function e164(params) {
+    return core._e164(exports.ZodE164, params);
 }
-export const ZodJWT = /*@__PURE__*/ core.$constructor("ZodJWT", (inst, def) => {
+exports.ZodJWT = core.$constructor("ZodJWT", (inst, def) => {
     // ZodStringFormat.init(inst, def);
     core.$ZodJWT.init(inst, def);
-    ZodStringFormat.init(inst, def);
+    exports.ZodStringFormat.init(inst, def);
 });
-export function jwt(params) {
-    return core._jwt(ZodJWT, params);
+function jwt(params) {
+    return core._jwt(exports.ZodJWT, params);
 }
-export const ZodCustomStringFormat = /*@__PURE__*/ core.$constructor("ZodCustomStringFormat", (inst, def) => {
+exports.ZodCustomStringFormat = core.$constructor("ZodCustomStringFormat", (inst, def) => {
     // ZodStringFormat.init(inst, def);
     core.$ZodCustomStringFormat.init(inst, def);
-    ZodStringFormat.init(inst, def);
+    exports.ZodStringFormat.init(inst, def);
 });
-export function stringFormat(format, fnOrRegex, _params = {}) {
-    return core._stringFormat(ZodCustomStringFormat, format, fnOrRegex, _params);
+function stringFormat(format, fnOrRegex, _params = {}) {
+    return core._stringFormat(exports.ZodCustomStringFormat, format, fnOrRegex, _params);
 }
-export function hostname(_params) {
-    return core._stringFormat(ZodCustomStringFormat, "hostname", core.regexes.hostname, _params);
+function hostname(_params) {
+    return core._stringFormat(exports.ZodCustomStringFormat, "hostname", core.regexes.hostname, _params);
 }
-export function hex(_params) {
-    return core._stringFormat(ZodCustomStringFormat, "hex", core.regexes.hex, _params);
+function hex(_params) {
+    return core._stringFormat(exports.ZodCustomStringFormat, "hex", core.regexes.hex, _params);
 }
-export function hash(alg, params) {
+function hash(alg, params) {
     const enc = params?.enc ?? "hex";
     const format = `${alg}_${enc}`;
     const regex = core.regexes[format];
     if (!regex)
         throw new Error(`Unrecognized hash format: ${format}`);
-    return core._stringFormat(ZodCustomStringFormat, format, regex, params);
+    return core._stringFormat(exports.ZodCustomStringFormat, format, regex, params);
 }
-export const ZodNumber = /*@__PURE__*/ core.$constructor("ZodNumber", (inst, def) => {
+exports.ZodNumber = core.$constructor("ZodNumber", (inst, def) => {
     core.$ZodNumber.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.numberProcessor(inst, ctx, json, params);
     inst.gt = (value, params) => inst.check(checks.gt(value, params));
     inst.gte = (value, params) => inst.check(checks.gte(value, params));
@@ -389,39 +510,39 @@ export const ZodNumber = /*@__PURE__*/ core.$constructor("ZodNumber", (inst, def
     inst.isFinite = true;
     inst.format = bag.format ?? null;
 });
-export function number(params) {
-    return core._number(ZodNumber, params);
+function number(params) {
+    return core._number(exports.ZodNumber, params);
 }
-export const ZodNumberFormat = /*@__PURE__*/ core.$constructor("ZodNumberFormat", (inst, def) => {
+exports.ZodNumberFormat = core.$constructor("ZodNumberFormat", (inst, def) => {
     core.$ZodNumberFormat.init(inst, def);
-    ZodNumber.init(inst, def);
+    exports.ZodNumber.init(inst, def);
 });
-export function int(params) {
-    return core._int(ZodNumberFormat, params);
+function int(params) {
+    return core._int(exports.ZodNumberFormat, params);
 }
-export function float32(params) {
-    return core._float32(ZodNumberFormat, params);
+function float32(params) {
+    return core._float32(exports.ZodNumberFormat, params);
 }
-export function float64(params) {
-    return core._float64(ZodNumberFormat, params);
+function float64(params) {
+    return core._float64(exports.ZodNumberFormat, params);
 }
-export function int32(params) {
-    return core._int32(ZodNumberFormat, params);
+function int32(params) {
+    return core._int32(exports.ZodNumberFormat, params);
 }
-export function uint32(params) {
-    return core._uint32(ZodNumberFormat, params);
+function uint32(params) {
+    return core._uint32(exports.ZodNumberFormat, params);
 }
-export const ZodBoolean = /*@__PURE__*/ core.$constructor("ZodBoolean", (inst, def) => {
+exports.ZodBoolean = core.$constructor("ZodBoolean", (inst, def) => {
     core.$ZodBoolean.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.booleanProcessor(inst, ctx, json, params);
 });
-export function boolean(params) {
-    return core._boolean(ZodBoolean, params);
+function boolean(params) {
+    return core._boolean(exports.ZodBoolean, params);
 }
-export const ZodBigInt = /*@__PURE__*/ core.$constructor("ZodBigInt", (inst, def) => {
+exports.ZodBigInt = core.$constructor("ZodBigInt", (inst, def) => {
     core.$ZodBigInt.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.bigintProcessor(inst, ctx, json, params);
     inst.gte = (value, params) => inst.check(checks.gte(value, params));
     inst.min = (value, params) => inst.check(checks.gte(value, params));
@@ -441,83 +562,80 @@ export const ZodBigInt = /*@__PURE__*/ core.$constructor("ZodBigInt", (inst, def
     inst.maxValue = bag.maximum ?? null;
     inst.format = bag.format ?? null;
 });
-export function bigint(params) {
-    return core._bigint(ZodBigInt, params);
+function bigint(params) {
+    return core._bigint(exports.ZodBigInt, params);
 }
-export const ZodBigIntFormat = /*@__PURE__*/ core.$constructor("ZodBigIntFormat", (inst, def) => {
+exports.ZodBigIntFormat = core.$constructor("ZodBigIntFormat", (inst, def) => {
     core.$ZodBigIntFormat.init(inst, def);
-    ZodBigInt.init(inst, def);
+    exports.ZodBigInt.init(inst, def);
 });
 // int64
-export function int64(params) {
-    return core._int64(ZodBigIntFormat, params);
+function int64(params) {
+    return core._int64(exports.ZodBigIntFormat, params);
 }
 // uint64
-export function uint64(params) {
-    return core._uint64(ZodBigIntFormat, params);
+function uint64(params) {
+    return core._uint64(exports.ZodBigIntFormat, params);
 }
-export const ZodSymbol = /*@__PURE__*/ core.$constructor("ZodSymbol", (inst, def) => {
+exports.ZodSymbol = core.$constructor("ZodSymbol", (inst, def) => {
     core.$ZodSymbol.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.symbolProcessor(inst, ctx, json, params);
 });
-export function symbol(params) {
-    return core._symbol(ZodSymbol, params);
+function symbol(params) {
+    return core._symbol(exports.ZodSymbol, params);
 }
-export const ZodUndefined = /*@__PURE__*/ core.$constructor("ZodUndefined", (inst, def) => {
+exports.ZodUndefined = core.$constructor("ZodUndefined", (inst, def) => {
     core.$ZodUndefined.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.undefinedProcessor(inst, ctx, json, params);
 });
 function _undefined(params) {
-    return core._undefined(ZodUndefined, params);
+    return core._undefined(exports.ZodUndefined, params);
 }
-export { _undefined as undefined };
-export const ZodNull = /*@__PURE__*/ core.$constructor("ZodNull", (inst, def) => {
+exports.ZodNull = core.$constructor("ZodNull", (inst, def) => {
     core.$ZodNull.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.nullProcessor(inst, ctx, json, params);
 });
 function _null(params) {
-    return core._null(ZodNull, params);
+    return core._null(exports.ZodNull, params);
 }
-export { _null as null };
-export const ZodAny = /*@__PURE__*/ core.$constructor("ZodAny", (inst, def) => {
+exports.ZodAny = core.$constructor("ZodAny", (inst, def) => {
     core.$ZodAny.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.anyProcessor(inst, ctx, json, params);
 });
-export function any() {
-    return core._any(ZodAny);
+function any() {
+    return core._any(exports.ZodAny);
 }
-export const ZodUnknown = /*@__PURE__*/ core.$constructor("ZodUnknown", (inst, def) => {
+exports.ZodUnknown = core.$constructor("ZodUnknown", (inst, def) => {
     core.$ZodUnknown.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.unknownProcessor(inst, ctx, json, params);
 });
-export function unknown() {
-    return core._unknown(ZodUnknown);
+function unknown() {
+    return core._unknown(exports.ZodUnknown);
 }
-export const ZodNever = /*@__PURE__*/ core.$constructor("ZodNever", (inst, def) => {
+exports.ZodNever = core.$constructor("ZodNever", (inst, def) => {
     core.$ZodNever.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.neverProcessor(inst, ctx, json, params);
 });
-export function never(params) {
-    return core._never(ZodNever, params);
+function never(params) {
+    return core._never(exports.ZodNever, params);
 }
-export const ZodVoid = /*@__PURE__*/ core.$constructor("ZodVoid", (inst, def) => {
+exports.ZodVoid = core.$constructor("ZodVoid", (inst, def) => {
     core.$ZodVoid.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.voidProcessor(inst, ctx, json, params);
 });
 function _void(params) {
-    return core._void(ZodVoid, params);
+    return core._void(exports.ZodVoid, params);
 }
-export { _void as void };
-export const ZodDate = /*@__PURE__*/ core.$constructor("ZodDate", (inst, def) => {
+exports.ZodDate = core.$constructor("ZodDate", (inst, def) => {
     core.$ZodDate.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.dateProcessor(inst, ctx, json, params);
     inst.min = (value, params) => inst.check(checks.gte(value, params));
     inst.max = (value, params) => inst.check(checks.lte(value, params));
@@ -525,12 +643,12 @@ export const ZodDate = /*@__PURE__*/ core.$constructor("ZodDate", (inst, def) =>
     inst.minDate = c.minimum ? new Date(c.minimum) : null;
     inst.maxDate = c.maximum ? new Date(c.maximum) : null;
 });
-export function date(params) {
-    return core._date(ZodDate, params);
+function date(params) {
+    return core._date(exports.ZodDate, params);
 }
-export const ZodArray = /*@__PURE__*/ core.$constructor("ZodArray", (inst, def) => {
+exports.ZodArray = core.$constructor("ZodArray", (inst, def) => {
     core.$ZodArray.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.arrayProcessor(inst, ctx, json, params);
     inst.element = def.element;
     inst.min = (minLength, params) => inst.check(checks.minLength(minLength, params));
@@ -539,19 +657,19 @@ export const ZodArray = /*@__PURE__*/ core.$constructor("ZodArray", (inst, def) 
     inst.length = (len, params) => inst.check(checks.length(len, params));
     inst.unwrap = () => inst.element;
 });
-export function array(element, params) {
-    return core._array(ZodArray, element, params);
+function array(element, params) {
+    return core._array(exports.ZodArray, element, params);
 }
 // .keyof
-export function keyof(schema) {
+function keyof(schema) {
     const shape = schema._zod.def.shape;
     return _enum(Object.keys(shape));
 }
-export const ZodObject = /*@__PURE__*/ core.$constructor("ZodObject", (inst, def) => {
+exports.ZodObject = core.$constructor("ZodObject", (inst, def) => {
     core.$ZodObjectJIT.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.objectProcessor(inst, ctx, json, params);
-    util.defineLazy(inst, "shape", () => {
+    index_js_1.util.defineLazy(inst, "shape", () => {
         return def.shape;
     });
     inst.keyof = () => _enum(Object.keys(inst._zod.def.shape));
@@ -561,58 +679,58 @@ export const ZodObject = /*@__PURE__*/ core.$constructor("ZodObject", (inst, def
     inst.strict = () => inst.clone({ ...inst._zod.def, catchall: never() });
     inst.strip = () => inst.clone({ ...inst._zod.def, catchall: undefined });
     inst.extend = (incoming) => {
-        return util.extend(inst, incoming);
+        return index_js_1.util.extend(inst, incoming);
     };
     inst.safeExtend = (incoming) => {
-        return util.safeExtend(inst, incoming);
+        return index_js_1.util.safeExtend(inst, incoming);
     };
-    inst.merge = (other) => util.merge(inst, other);
-    inst.pick = (mask) => util.pick(inst, mask);
-    inst.omit = (mask) => util.omit(inst, mask);
-    inst.partial = (...args) => util.partial(ZodOptional, inst, args[0]);
-    inst.required = (...args) => util.required(ZodNonOptional, inst, args[0]);
+    inst.merge = (other) => index_js_1.util.merge(inst, other);
+    inst.pick = (mask) => index_js_1.util.pick(inst, mask);
+    inst.omit = (mask) => index_js_1.util.omit(inst, mask);
+    inst.partial = (...args) => index_js_1.util.partial(exports.ZodOptional, inst, args[0]);
+    inst.required = (...args) => index_js_1.util.required(exports.ZodNonOptional, inst, args[0]);
 });
-export function object(shape, params) {
+function object(shape, params) {
     const def = {
         type: "object",
         shape: shape ?? {},
-        ...util.normalizeParams(params),
+        ...index_js_1.util.normalizeParams(params),
     };
-    return new ZodObject(def);
+    return new exports.ZodObject(def);
 }
 // strictObject
-export function strictObject(shape, params) {
-    return new ZodObject({
+function strictObject(shape, params) {
+    return new exports.ZodObject({
         type: "object",
         shape,
         catchall: never(),
-        ...util.normalizeParams(params),
+        ...index_js_1.util.normalizeParams(params),
     });
 }
 // looseObject
-export function looseObject(shape, params) {
-    return new ZodObject({
+function looseObject(shape, params) {
+    return new exports.ZodObject({
         type: "object",
         shape,
         catchall: unknown(),
-        ...util.normalizeParams(params),
+        ...index_js_1.util.normalizeParams(params),
     });
 }
-export const ZodUnion = /*@__PURE__*/ core.$constructor("ZodUnion", (inst, def) => {
+exports.ZodUnion = core.$constructor("ZodUnion", (inst, def) => {
     core.$ZodUnion.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.unionProcessor(inst, ctx, json, params);
     inst.options = def.options;
 });
-export function union(options, params) {
-    return new ZodUnion({
+function union(options, params) {
+    return new exports.ZodUnion({
         type: "union",
         options: options,
-        ...util.normalizeParams(params),
+        ...index_js_1.util.normalizeParams(params),
     });
 }
-export const ZodXor = /*@__PURE__*/ core.$constructor("ZodXor", (inst, def) => {
-    ZodUnion.init(inst, def);
+exports.ZodXor = core.$constructor("ZodXor", (inst, def) => {
+    exports.ZodUnion.init(inst, def);
     core.$ZodXor.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.unionProcessor(inst, ctx, json, params);
     inst.options = def.options;
@@ -620,97 +738,97 @@ export const ZodXor = /*@__PURE__*/ core.$constructor("ZodXor", (inst, def) => {
 /** Creates an exclusive union (XOR) where exactly one option must match.
  * Unlike regular unions that succeed when any option matches, xor fails if
  * zero or more than one option matches the input. */
-export function xor(options, params) {
-    return new ZodXor({
+function xor(options, params) {
+    return new exports.ZodXor({
         type: "union",
         options: options,
         inclusive: false,
-        ...util.normalizeParams(params),
+        ...index_js_1.util.normalizeParams(params),
     });
 }
-export const ZodDiscriminatedUnion = /*@__PURE__*/ core.$constructor("ZodDiscriminatedUnion", (inst, def) => {
-    ZodUnion.init(inst, def);
+exports.ZodDiscriminatedUnion = core.$constructor("ZodDiscriminatedUnion", (inst, def) => {
+    exports.ZodUnion.init(inst, def);
     core.$ZodDiscriminatedUnion.init(inst, def);
 });
-export function discriminatedUnion(discriminator, options, params) {
+function discriminatedUnion(discriminator, options, params) {
     // const [options, params] = args;
-    return new ZodDiscriminatedUnion({
+    return new exports.ZodDiscriminatedUnion({
         type: "union",
         options,
         discriminator,
-        ...util.normalizeParams(params),
+        ...index_js_1.util.normalizeParams(params),
     });
 }
-export const ZodIntersection = /*@__PURE__*/ core.$constructor("ZodIntersection", (inst, def) => {
+exports.ZodIntersection = core.$constructor("ZodIntersection", (inst, def) => {
     core.$ZodIntersection.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.intersectionProcessor(inst, ctx, json, params);
 });
-export function intersection(left, right) {
-    return new ZodIntersection({
+function intersection(left, right) {
+    return new exports.ZodIntersection({
         type: "intersection",
         left: left,
         right: right,
     });
 }
-export const ZodTuple = /*@__PURE__*/ core.$constructor("ZodTuple", (inst, def) => {
+exports.ZodTuple = core.$constructor("ZodTuple", (inst, def) => {
     core.$ZodTuple.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.tupleProcessor(inst, ctx, json, params);
     inst.rest = (rest) => inst.clone({
         ...inst._zod.def,
         rest: rest,
     });
 });
-export function tuple(items, _paramsOrRest, _params) {
+function tuple(items, _paramsOrRest, _params) {
     const hasRest = _paramsOrRest instanceof core.$ZodType;
     const params = hasRest ? _params : _paramsOrRest;
     const rest = hasRest ? _paramsOrRest : null;
-    return new ZodTuple({
+    return new exports.ZodTuple({
         type: "tuple",
         items: items,
         rest,
-        ...util.normalizeParams(params),
+        ...index_js_1.util.normalizeParams(params),
     });
 }
-export const ZodRecord = /*@__PURE__*/ core.$constructor("ZodRecord", (inst, def) => {
+exports.ZodRecord = core.$constructor("ZodRecord", (inst, def) => {
     core.$ZodRecord.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.recordProcessor(inst, ctx, json, params);
     inst.keyType = def.keyType;
     inst.valueType = def.valueType;
 });
-export function record(keyType, valueType, params) {
-    return new ZodRecord({
+function record(keyType, valueType, params) {
+    return new exports.ZodRecord({
         type: "record",
         keyType,
         valueType: valueType,
-        ...util.normalizeParams(params),
+        ...index_js_1.util.normalizeParams(params),
     });
 }
 // type alksjf = core.output<core.$ZodRecordKey>;
-export function partialRecord(keyType, valueType, params) {
+function partialRecord(keyType, valueType, params) {
     const k = core.clone(keyType);
     k._zod.values = undefined;
-    return new ZodRecord({
+    return new exports.ZodRecord({
         type: "record",
         keyType: k,
         valueType: valueType,
-        ...util.normalizeParams(params),
+        ...index_js_1.util.normalizeParams(params),
     });
 }
-export function looseRecord(keyType, valueType, params) {
-    return new ZodRecord({
+function looseRecord(keyType, valueType, params) {
+    return new exports.ZodRecord({
         type: "record",
         keyType,
         valueType: valueType,
         mode: "loose",
-        ...util.normalizeParams(params),
+        ...index_js_1.util.normalizeParams(params),
     });
 }
-export const ZodMap = /*@__PURE__*/ core.$constructor("ZodMap", (inst, def) => {
+exports.ZodMap = core.$constructor("ZodMap", (inst, def) => {
     core.$ZodMap.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.mapProcessor(inst, ctx, json, params);
     inst.keyType = def.keyType;
     inst.valueType = def.valueType;
@@ -719,33 +837,33 @@ export const ZodMap = /*@__PURE__*/ core.$constructor("ZodMap", (inst, def) => {
     inst.max = (...args) => inst.check(core._maxSize(...args));
     inst.size = (...args) => inst.check(core._size(...args));
 });
-export function map(keyType, valueType, params) {
-    return new ZodMap({
+function map(keyType, valueType, params) {
+    return new exports.ZodMap({
         type: "map",
         keyType: keyType,
         valueType: valueType,
-        ...util.normalizeParams(params),
+        ...index_js_1.util.normalizeParams(params),
     });
 }
-export const ZodSet = /*@__PURE__*/ core.$constructor("ZodSet", (inst, def) => {
+exports.ZodSet = core.$constructor("ZodSet", (inst, def) => {
     core.$ZodSet.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.setProcessor(inst, ctx, json, params);
     inst.min = (...args) => inst.check(core._minSize(...args));
     inst.nonempty = (params) => inst.check(core._minSize(1, params));
     inst.max = (...args) => inst.check(core._maxSize(...args));
     inst.size = (...args) => inst.check(core._size(...args));
 });
-export function set(valueType, params) {
-    return new ZodSet({
+function set(valueType, params) {
+    return new exports.ZodSet({
         type: "set",
         valueType: valueType,
-        ...util.normalizeParams(params),
+        ...index_js_1.util.normalizeParams(params),
     });
 }
-export const ZodEnum = /*@__PURE__*/ core.$constructor("ZodEnum", (inst, def) => {
+exports.ZodEnum = core.$constructor("ZodEnum", (inst, def) => {
     core.$ZodEnum.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.enumProcessor(inst, ctx, json, params);
     inst.enum = def.entries;
     inst.options = Object.values(def.entries);
@@ -759,10 +877,10 @@ export const ZodEnum = /*@__PURE__*/ core.$constructor("ZodEnum", (inst, def) =>
             else
                 throw new Error(`Key ${value} not found in enum`);
         }
-        return new ZodEnum({
+        return new exports.ZodEnum({
             ...def,
             checks: [],
-            ...util.normalizeParams(params),
+            ...index_js_1.util.normalizeParams(params),
             entries: newEntries,
         });
     };
@@ -775,23 +893,22 @@ export const ZodEnum = /*@__PURE__*/ core.$constructor("ZodEnum", (inst, def) =>
             else
                 throw new Error(`Key ${value} not found in enum`);
         }
-        return new ZodEnum({
+        return new exports.ZodEnum({
             ...def,
             checks: [],
-            ...util.normalizeParams(params),
+            ...index_js_1.util.normalizeParams(params),
             entries: newEntries,
         });
     };
 });
 function _enum(values, params) {
     const entries = Array.isArray(values) ? Object.fromEntries(values.map((v) => [v, v])) : values;
-    return new ZodEnum({
+    return new exports.ZodEnum({
         type: "enum",
         entries,
-        ...util.normalizeParams(params),
+        ...index_js_1.util.normalizeParams(params),
     });
 }
-export { _enum as enum };
 /** @deprecated This API has been merged into `z.enum()`. Use `z.enum()` instead.
  *
  * ```ts
@@ -799,16 +916,16 @@ export { _enum as enum };
  * z.enum(Colors);
  * ```
  */
-export function nativeEnum(entries, params) {
-    return new ZodEnum({
+function nativeEnum(entries, params) {
+    return new exports.ZodEnum({
         type: "enum",
         entries,
-        ...util.normalizeParams(params),
+        ...index_js_1.util.normalizeParams(params),
     });
 }
-export const ZodLiteral = /*@__PURE__*/ core.$constructor("ZodLiteral", (inst, def) => {
+exports.ZodLiteral = core.$constructor("ZodLiteral", (inst, def) => {
     core.$ZodLiteral.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.literalProcessor(inst, ctx, json, params);
     inst.values = new Set(def.values);
     Object.defineProperty(inst, "value", {
@@ -820,27 +937,27 @@ export const ZodLiteral = /*@__PURE__*/ core.$constructor("ZodLiteral", (inst, d
         },
     });
 });
-export function literal(value, params) {
-    return new ZodLiteral({
+function literal(value, params) {
+    return new exports.ZodLiteral({
         type: "literal",
         values: Array.isArray(value) ? value : [value],
-        ...util.normalizeParams(params),
+        ...index_js_1.util.normalizeParams(params),
     });
 }
-export const ZodFile = /*@__PURE__*/ core.$constructor("ZodFile", (inst, def) => {
+exports.ZodFile = core.$constructor("ZodFile", (inst, def) => {
     core.$ZodFile.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.fileProcessor(inst, ctx, json, params);
     inst.min = (size, params) => inst.check(core._minSize(size, params));
     inst.max = (size, params) => inst.check(core._maxSize(size, params));
     inst.mime = (types, params) => inst.check(core._mime(Array.isArray(types) ? types : [types], params));
 });
-export function file(params) {
-    return core._file(ZodFile, params);
+function file(params) {
+    return core._file(exports.ZodFile, params);
 }
-export const ZodTransform = /*@__PURE__*/ core.$constructor("ZodTransform", (inst, def) => {
+exports.ZodTransform = core.$constructor("ZodTransform", (inst, def) => {
     core.$ZodTransform.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.transformProcessor(inst, ctx, json, params);
     inst._zod.parse = (payload, _ctx) => {
         if (_ctx.direction === "backward") {
@@ -848,7 +965,7 @@ export const ZodTransform = /*@__PURE__*/ core.$constructor("ZodTransform", (ins
         }
         payload.addIssue = (issue) => {
             if (typeof issue === "string") {
-                payload.issues.push(util.issue(issue, payload.value, def));
+                payload.issues.push(index_js_1.util.issue(issue, payload.value, def));
             }
             else {
                 // for Zod 3 backwards compatibility
@@ -859,7 +976,7 @@ export const ZodTransform = /*@__PURE__*/ core.$constructor("ZodTransform", (ins
                 _issue.input ?? (_issue.input = payload.value);
                 _issue.inst ?? (_issue.inst = inst);
                 // _issue.continue ??= true;
-                payload.issues.push(util.issue(_issue));
+                payload.issues.push(index_js_1.util.issue(_issue));
             }
         };
         const output = def.transform(payload.value, payload);
@@ -873,152 +990,151 @@ export const ZodTransform = /*@__PURE__*/ core.$constructor("ZodTransform", (ins
         return payload;
     };
 });
-export function transform(fn) {
-    return new ZodTransform({
+function transform(fn) {
+    return new exports.ZodTransform({
         type: "transform",
         transform: fn,
     });
 }
-export const ZodOptional = /*@__PURE__*/ core.$constructor("ZodOptional", (inst, def) => {
+exports.ZodOptional = core.$constructor("ZodOptional", (inst, def) => {
     core.$ZodOptional.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.optionalProcessor(inst, ctx, json, params);
     inst.unwrap = () => inst._zod.def.innerType;
 });
-export function optional(innerType) {
-    return new ZodOptional({
+function optional(innerType) {
+    return new exports.ZodOptional({
         type: "optional",
         innerType: innerType,
     });
 }
-export const ZodExactOptional = /*@__PURE__*/ core.$constructor("ZodExactOptional", (inst, def) => {
+exports.ZodExactOptional = core.$constructor("ZodExactOptional", (inst, def) => {
     core.$ZodExactOptional.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.optionalProcessor(inst, ctx, json, params);
     inst.unwrap = () => inst._zod.def.innerType;
 });
-export function exactOptional(innerType) {
-    return new ZodExactOptional({
+function exactOptional(innerType) {
+    return new exports.ZodExactOptional({
         type: "optional",
         innerType: innerType,
     });
 }
-export const ZodNullable = /*@__PURE__*/ core.$constructor("ZodNullable", (inst, def) => {
+exports.ZodNullable = core.$constructor("ZodNullable", (inst, def) => {
     core.$ZodNullable.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.nullableProcessor(inst, ctx, json, params);
     inst.unwrap = () => inst._zod.def.innerType;
 });
-export function nullable(innerType) {
-    return new ZodNullable({
+function nullable(innerType) {
+    return new exports.ZodNullable({
         type: "nullable",
         innerType: innerType,
     });
 }
 // nullish
-export function nullish(innerType) {
+function nullish(innerType) {
     return optional(nullable(innerType));
 }
-export const ZodDefault = /*@__PURE__*/ core.$constructor("ZodDefault", (inst, def) => {
+exports.ZodDefault = core.$constructor("ZodDefault", (inst, def) => {
     core.$ZodDefault.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.defaultProcessor(inst, ctx, json, params);
     inst.unwrap = () => inst._zod.def.innerType;
     inst.removeDefault = inst.unwrap;
 });
-export function _default(innerType, defaultValue) {
-    return new ZodDefault({
+function _default(innerType, defaultValue) {
+    return new exports.ZodDefault({
         type: "default",
         innerType: innerType,
         get defaultValue() {
-            return typeof defaultValue === "function" ? defaultValue() : util.shallowClone(defaultValue);
+            return typeof defaultValue === "function" ? defaultValue() : index_js_1.util.shallowClone(defaultValue);
         },
     });
 }
-export const ZodPrefault = /*@__PURE__*/ core.$constructor("ZodPrefault", (inst, def) => {
+exports.ZodPrefault = core.$constructor("ZodPrefault", (inst, def) => {
     core.$ZodPrefault.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.prefaultProcessor(inst, ctx, json, params);
     inst.unwrap = () => inst._zod.def.innerType;
 });
-export function prefault(innerType, defaultValue) {
-    return new ZodPrefault({
+function prefault(innerType, defaultValue) {
+    return new exports.ZodPrefault({
         type: "prefault",
         innerType: innerType,
         get defaultValue() {
-            return typeof defaultValue === "function" ? defaultValue() : util.shallowClone(defaultValue);
+            return typeof defaultValue === "function" ? defaultValue() : index_js_1.util.shallowClone(defaultValue);
         },
     });
 }
-export const ZodNonOptional = /*@__PURE__*/ core.$constructor("ZodNonOptional", (inst, def) => {
+exports.ZodNonOptional = core.$constructor("ZodNonOptional", (inst, def) => {
     core.$ZodNonOptional.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.nonoptionalProcessor(inst, ctx, json, params);
     inst.unwrap = () => inst._zod.def.innerType;
 });
-export function nonoptional(innerType, params) {
-    return new ZodNonOptional({
+function nonoptional(innerType, params) {
+    return new exports.ZodNonOptional({
         type: "nonoptional",
         innerType: innerType,
-        ...util.normalizeParams(params),
+        ...index_js_1.util.normalizeParams(params),
     });
 }
-export const ZodSuccess = /*@__PURE__*/ core.$constructor("ZodSuccess", (inst, def) => {
+exports.ZodSuccess = core.$constructor("ZodSuccess", (inst, def) => {
     core.$ZodSuccess.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.successProcessor(inst, ctx, json, params);
     inst.unwrap = () => inst._zod.def.innerType;
 });
-export function success(innerType) {
-    return new ZodSuccess({
+function success(innerType) {
+    return new exports.ZodSuccess({
         type: "success",
         innerType: innerType,
     });
 }
-export const ZodCatch = /*@__PURE__*/ core.$constructor("ZodCatch", (inst, def) => {
+exports.ZodCatch = core.$constructor("ZodCatch", (inst, def) => {
     core.$ZodCatch.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.catchProcessor(inst, ctx, json, params);
     inst.unwrap = () => inst._zod.def.innerType;
     inst.removeCatch = inst.unwrap;
 });
 function _catch(innerType, catchValue) {
-    return new ZodCatch({
+    return new exports.ZodCatch({
         type: "catch",
         innerType: innerType,
         catchValue: (typeof catchValue === "function" ? catchValue : () => catchValue),
     });
 }
-export { _catch as catch };
-export const ZodNaN = /*@__PURE__*/ core.$constructor("ZodNaN", (inst, def) => {
+exports.ZodNaN = core.$constructor("ZodNaN", (inst, def) => {
     core.$ZodNaN.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.nanProcessor(inst, ctx, json, params);
 });
-export function nan(params) {
-    return core._nan(ZodNaN, params);
+function nan(params) {
+    return core._nan(exports.ZodNaN, params);
 }
-export const ZodPipe = /*@__PURE__*/ core.$constructor("ZodPipe", (inst, def) => {
+exports.ZodPipe = core.$constructor("ZodPipe", (inst, def) => {
     core.$ZodPipe.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.pipeProcessor(inst, ctx, json, params);
     inst.in = def.in;
     inst.out = def.out;
 });
-export function pipe(in_, out) {
-    return new ZodPipe({
+function pipe(in_, out) {
+    return new exports.ZodPipe({
         type: "pipe",
         in: in_,
         out: out,
         // ...util.normalizeParams(params),
     });
 }
-export const ZodCodec = /*@__PURE__*/ core.$constructor("ZodCodec", (inst, def) => {
-    ZodPipe.init(inst, def);
+exports.ZodCodec = core.$constructor("ZodCodec", (inst, def) => {
+    exports.ZodPipe.init(inst, def);
     core.$ZodCodec.init(inst, def);
 });
-export function codec(in_, out, params) {
-    return new ZodCodec({
+function codec(in_, out, params) {
+    return new exports.ZodCodec({
         type: "pipe",
         in: in_,
         out: out,
@@ -1026,74 +1142,73 @@ export function codec(in_, out, params) {
         reverseTransform: params.encode,
     });
 }
-export const ZodReadonly = /*@__PURE__*/ core.$constructor("ZodReadonly", (inst, def) => {
+exports.ZodReadonly = core.$constructor("ZodReadonly", (inst, def) => {
     core.$ZodReadonly.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.readonlyProcessor(inst, ctx, json, params);
     inst.unwrap = () => inst._zod.def.innerType;
 });
-export function readonly(innerType) {
-    return new ZodReadonly({
+function readonly(innerType) {
+    return new exports.ZodReadonly({
         type: "readonly",
         innerType: innerType,
     });
 }
-export const ZodTemplateLiteral = /*@__PURE__*/ core.$constructor("ZodTemplateLiteral", (inst, def) => {
+exports.ZodTemplateLiteral = core.$constructor("ZodTemplateLiteral", (inst, def) => {
     core.$ZodTemplateLiteral.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.templateLiteralProcessor(inst, ctx, json, params);
 });
-export function templateLiteral(parts, params) {
-    return new ZodTemplateLiteral({
+function templateLiteral(parts, params) {
+    return new exports.ZodTemplateLiteral({
         type: "template_literal",
         parts,
-        ...util.normalizeParams(params),
+        ...index_js_1.util.normalizeParams(params),
     });
 }
-export const ZodLazy = /*@__PURE__*/ core.$constructor("ZodLazy", (inst, def) => {
+exports.ZodLazy = core.$constructor("ZodLazy", (inst, def) => {
     core.$ZodLazy.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.lazyProcessor(inst, ctx, json, params);
     inst.unwrap = () => inst._zod.def.getter();
 });
-export function lazy(getter) {
-    return new ZodLazy({
+function lazy(getter) {
+    return new exports.ZodLazy({
         type: "lazy",
         getter: getter,
     });
 }
-export const ZodPromise = /*@__PURE__*/ core.$constructor("ZodPromise", (inst, def) => {
+exports.ZodPromise = core.$constructor("ZodPromise", (inst, def) => {
     core.$ZodPromise.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.promiseProcessor(inst, ctx, json, params);
     inst.unwrap = () => inst._zod.def.innerType;
 });
-export function promise(innerType) {
-    return new ZodPromise({
+function promise(innerType) {
+    return new exports.ZodPromise({
         type: "promise",
         innerType: innerType,
     });
 }
-export const ZodFunction = /*@__PURE__*/ core.$constructor("ZodFunction", (inst, def) => {
+exports.ZodFunction = core.$constructor("ZodFunction", (inst, def) => {
     core.$ZodFunction.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.functionProcessor(inst, ctx, json, params);
 });
-export function _function(params) {
-    return new ZodFunction({
+function _function(params) {
+    return new exports.ZodFunction({
         type: "function",
         input: Array.isArray(params?.input) ? tuple(params?.input) : (params?.input ?? array(unknown())),
         output: params?.output ?? unknown(),
     });
 }
-export { _function as function };
-export const ZodCustom = /*@__PURE__*/ core.$constructor("ZodCustom", (inst, def) => {
+exports.ZodCustom = core.$constructor("ZodCustom", (inst, def) => {
     core.$ZodCustom.init(inst, def);
-    ZodType.init(inst, def);
+    exports.ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json, params) => processors.customProcessor(inst, ctx, json, params);
 });
 // custom checks
-export function check(fn) {
+function check(fn) {
     const ch = new core.$ZodCheck({
         check: "custom",
         // ...util.normalizeParams(params),
@@ -1101,26 +1216,26 @@ export function check(fn) {
     ch._zod.check = fn;
     return ch;
 }
-export function custom(fn, _params) {
-    return core._custom(ZodCustom, fn ?? (() => true), _params);
+function custom(fn, _params) {
+    return core._custom(exports.ZodCustom, fn ?? (() => true), _params);
 }
-export function refine(fn, _params = {}) {
-    return core._refine(ZodCustom, fn, _params);
+function refine(fn, _params = {}) {
+    return core._refine(exports.ZodCustom, fn, _params);
 }
 // superRefine
-export function superRefine(fn) {
+function superRefine(fn) {
     return core._superRefine(fn);
 }
 // Re-export describe and meta from core
-export const describe = core.describe;
-export const meta = core.meta;
+exports.describe = core.describe;
+exports.meta = core.meta;
 function _instanceof(cls, params = {}) {
-    const inst = new ZodCustom({
+    const inst = new exports.ZodCustom({
         type: "custom",
         check: "custom",
         fn: (data) => data instanceof cls,
         abort: true,
-        ...util.normalizeParams(params),
+        ...index_js_1.util.normalizeParams(params),
     });
     inst._zod.bag.Class = cls;
     // Override check to emit invalid_type instead of custom
@@ -1137,14 +1252,14 @@ function _instanceof(cls, params = {}) {
     };
     return inst;
 }
-export { _instanceof as instanceof };
 // stringbool
-export const stringbool = (...args) => core._stringbool({
-    Codec: ZodCodec,
-    Boolean: ZodBoolean,
-    String: ZodString,
+const stringbool = (...args) => core._stringbool({
+    Codec: exports.ZodCodec,
+    Boolean: exports.ZodBoolean,
+    String: exports.ZodString,
 }, ...args);
-export function json(params) {
+exports.stringbool = stringbool;
+function json(params) {
     const jsonSchema = lazy(() => {
         return union([string(params), number(), boolean(), _null(), array(jsonSchema), record(string(), jsonSchema)]);
     });
@@ -1152,6 +1267,6 @@ export function json(params) {
 }
 // preprocess
 // /** @deprecated Use `z.pipe()` and `z.transform()` instead. */
-export function preprocess(fn, schema) {
+function preprocess(fn, schema) {
     return pipe(transform(fn), schema);
 }

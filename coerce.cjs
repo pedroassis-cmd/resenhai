@@ -23,19 +23,25 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.safeDecodeAsync = exports.safeEncodeAsync = exports.safeDecode = exports.safeEncode = exports.decodeAsync = exports.encodeAsync = exports.decode = exports.encode = exports.safeParseAsync = exports.safeParse = exports.parseAsync = exports.parse = void 0;
+exports.string = string;
+exports.number = number;
+exports.boolean = boolean;
+exports.bigint = bigint;
+exports.date = date;
 const core = __importStar(require("../core/index.cjs"));
-const errors_js_1 = require("./errors.cjs");
-exports.parse = core._parse(errors_js_1.ZodRealError);
-exports.parseAsync = core._parseAsync(errors_js_1.ZodRealError);
-exports.safeParse = core._safeParse(errors_js_1.ZodRealError);
-exports.safeParseAsync = core._safeParseAsync(errors_js_1.ZodRealError);
-// Codec functions
-exports.encode = core._encode(errors_js_1.ZodRealError);
-exports.decode = core._decode(errors_js_1.ZodRealError);
-exports.encodeAsync = core._encodeAsync(errors_js_1.ZodRealError);
-exports.decodeAsync = core._decodeAsync(errors_js_1.ZodRealError);
-exports.safeEncode = core._safeEncode(errors_js_1.ZodRealError);
-exports.safeDecode = core._safeDecode(errors_js_1.ZodRealError);
-exports.safeEncodeAsync = core._safeEncodeAsync(errors_js_1.ZodRealError);
-exports.safeDecodeAsync = core._safeDecodeAsync(errors_js_1.ZodRealError);
+const schemas = __importStar(require("./schemas.cjs"));
+function string(params) {
+    return core._coercedString(schemas.ZodString, params);
+}
+function number(params) {
+    return core._coercedNumber(schemas.ZodNumber, params);
+}
+function boolean(params) {
+    return core._coercedBoolean(schemas.ZodBoolean, params);
+}
+function bigint(params) {
+    return core._coercedBigint(schemas.ZodBigInt, params);
+}
+function date(params) {
+    return core._coercedDate(schemas.ZodDate, params);
+}
