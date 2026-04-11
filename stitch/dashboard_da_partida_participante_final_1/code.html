@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&amp;family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-container": "#00290e",
+              "on-surface-variant": "#a3aea5",
+              "primary-dim": "#5ae682",
+              "on-error": "#450900",
+              "surface-container-highest": "#1b2921",
+              "secondary-fixed": "#ffc885",
+              "on-secondary-fixed": "#4c2e00",
+              "inverse-on-surface": "#4d5851",
+              "on-background": "#f1fcf3",
+              "surface-bright": "#202f27",
+              "secondary-fixed-dim": "#ffb554",
+              "error": "#ff7351",
+              "tertiary-fixed-dim": "#ad92ff",
+              "error-container": "#b92902",
+              "secondary-container": "#855300",
+              "on-tertiary": "#31067e",
+              "tertiary-container": "#a589f8",
+              "primary-fixed-dim": "#5ae682",
+              "surface": "#060f0a",
+              "surface-container-high": "#16221b",
+              "on-primary": "#005927",
+              "on-tertiary-container": "#230062",
+              "on-secondary-container": "#fff6f0",
+              "surface-container-low": "#0b1610",
+              "on-surface": "#f1fcf3",
+              "on-error-container": "#ffd2c8",
+              "on-primary-fixed": "#00441c",
+              "primary-container": "#1cb85b",
+              "on-primary-fixed-variant": "#00642d",
+              "primary": "#1cb85b",
+              "secondary-dim": "#e79400",
+              "surface-variant": "#1b2921",
+              "surface-tint": "#1cb85b",
+              "outline": "#6d7870",
+              "secondary": "#f8a010",
+              "inverse-surface": "#f1fcf3",
+              "on-secondary-fixed-variant": "#724700",
+              "on-tertiary-fixed-variant": "#41208e",
+              "tertiary": "#b299ff",
+              "surface-container": "#101c16",
+              "on-secondary": "#4a2c00",
+              "inverse-primary": "#006e32",
+              "error-dim": "#d53d18",
+              "outline-variant": "#404a44",
+              "tertiary-fixed": "#baa3ff",
+              "primary-fixed": "#1cb85b",
+              "surface-dim": "#060f0a",
+              "background": "#060f0a",
+              "on-tertiary-fixed": "#1d0054",
+              "surface-container-lowest": "#000000",
+              "tertiary-dim": "#a88cfb"
+            },
+            fontFamily: {
+              "syne": ["Syne", "sans-serif"],
+              "dm-sans": ["DM Sans", "sans-serif"],
+              "headline": ["Syne"],
+              "body": ["DM Sans"],
+              "label": ["DM Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .font-syne { font-family: 'Syne', sans-serif; }
+        .font-dm-sans { font-family: 'DM Sans', sans-serif; }
+        .glass-header { background: rgba(6, 15, 10, 0.8); backdrop-filter: blur(20px); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-dm-sans selection:bg-primary selection:text-on-primary-container">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 glass-header flex justify-between items-center px-6 py-4 w-full border-b border-white/5">
+<button class="flex items-center gap-2 text-white/60 hover:text-white transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+<span class="text-xs font-bold uppercase tracking-widest">Voltar</span>
+</button>
+<div class="flex items-center gap-2 bg-primary/10 border border-primary/20 px-3 py-1 rounded-full">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-primary">Você está confirmado</span>
+</div>
+</header>
+<main class="px-6 pb-32">
+<!-- Hero Section: Title & Progress -->
+<section class="mt-8 mb-10">
+<h1 class="font-syne font-extrabold text-[32px] uppercase tracking-tighter text-on-surface leading-none mb-6">
+                Arena Central <br/>
+<span class="text-primary italic">Sábado 18h</span>
+</h1>
+<div class="bg-surface-container-low rounded-2xl p-6 border border-white/5">
+<div class="flex justify-between items-end mb-3">
+<div>
+<span class="block text-[10px] font-bold uppercase tracking-widest text-white/40 mb-1">Status da Pelada</span>
+<div class="flex items-baseline gap-1">
+<span class="font-syne text-3xl font-extrabold text-on-surface">9/14</span>
+<span class="font-dm-sans text-white/40 text-sm">jogadores</span>
+</div>
+</div>
+<span class="text-primary font-bold text-xs uppercase tracking-wider">5 Vagas Abertas</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full transition-all duration-1000" style="width: 64.2%"></div>
+</div>
+</div>
+</section>
+<!-- Dynamic Tabs -->
+<nav class="flex gap-2 mb-8 overflow-x-auto no-scrollbar pb-2">
+<button class="whitespace-nowrap px-6 py-2.5 rounded-xl bg-primary text-on-primary-container font-bold text-xs uppercase tracking-widest">Escalação</button>
+<button class="whitespace-nowrap px-6 py-2.5 rounded-xl bg-surface-container-high text-white/60 font-bold text-xs uppercase tracking-widest hover:bg-surface-bright transition-colors">Local</button>
+<button class="whitespace-nowrap px-6 py-2.5 rounded-xl bg-surface-container-high text-white/60 font-bold text-xs uppercase tracking-widest hover:bg-surface-bright transition-colors">Substituto</button>
+</nav>
+<!-- Lineup Columns (Read-only Participant View) -->
+<div class="grid grid-cols-2 gap-4">
+<!-- Green Team -->
+<div class="space-y-4">
+<div class="flex items-center gap-2 mb-2">
+<div class="w-1.5 h-6 bg-primary rounded-full"></div>
+<h2 class="font-syne font-extrabold text-lg uppercase italic tracking-tighter">Time Verde</h2>
+</div>
+<div class="space-y-2">
+<!-- Player Row -->
+<div class="bg-surface-container rounded-xl p-3 flex items-center gap-3 border border-white/5">
+<div class="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center text-primary font-bold text-sm">G</div>
+<div class="flex-1 min-w-0">
+<p class="text-[11px] font-bold truncate text-on-surface">MARCOS V.</p>
+<p class="text-[9px] text-white/40 uppercase font-medium">Organizador</p>
+</div>
+</div>
+<!-- Player Row -->
+<div class="bg-surface-container rounded-xl p-3 flex items-center gap-3 border border-white/5">
+<div class="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center text-primary font-bold text-sm">Z</div>
+<div class="flex-1 min-w-0">
+<p class="text-[11px] font-bold truncate text-on-surface">RODRIGO</p>
+<p class="text-[9px] text-white/40 uppercase font-medium">Mensalista</p>
+</div>
+</div>
+<!-- Guest Player -->
+<div class="bg-surface-container/40 border border-dashed border-tertiary-container/30 rounded-xl p-3 flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-tertiary-container/20 flex items-center justify-center text-tertiary font-bold text-sm">A</div>
+<div class="flex-1 min-w-0">
+<p class="text-[11px] font-bold truncate text-on-surface">CONVIDADO 1</p>
+<p class="text-[9px] text-tertiary/70 uppercase font-medium">Convidado</p>
+</div>
+</div>
+<!-- Open Slot -->
+<div class="bg-surface-container-lowest border border-white/5 rounded-xl p-3 flex items-center gap-3 opacity-40">
+<div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center text-white/20"><span class="material-symbols-outlined text-sm">add</span></div>
+<p class="text-[9px] font-bold uppercase tracking-widest text-white/20">Vaga</p>
+</div>
+</div>
+</div>
+<!-- White Team -->
+<div class="space-y-4">
+<div class="flex items-center gap-2 mb-2">
+<div class="w-1.5 h-6 bg-white/20 rounded-full"></div>
+<h2 class="font-syne font-extrabold text-lg uppercase italic tracking-tighter">Time Branco</h2>
+</div>
+<div class="space-y-2">
+<div class="bg-surface-container rounded-xl p-3 flex items-center gap-3 border border-white/5">
+<div class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-white font-bold text-sm">G</div>
+<div class="flex-1 min-w-0">
+<p class="text-[11px] font-bold truncate text-on-surface">FELIPE K.</p>
+<p class="text-[9px] text-white/40 uppercase font-medium">Mensalista</p>
+</div>
+</div>
+<div class="bg-surface-container rounded-xl p-3 flex items-center gap-3 border border-white/5">
+<div class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-white font-bold text-sm">M</div>
+<div class="flex-1 min-w-0">
+<p class="text-[11px] font-bold truncate text-on-surface">GABRIEL</p>
+<p class="text-[9px] text-white/40 uppercase font-medium">Mensalista</p>
+</div>
+</div>
+<div class="bg-surface-container rounded-xl p-3 flex items-center gap-3 border border-white/5">
+<div class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-white font-bold text-sm">A</div>
+<div class="flex-1 min-w-0">
+<p class="text-[11px] font-bold truncate text-on-surface">TIAGO L.</p>
+<p class="text-[9px] text-white/40 uppercase font-medium">Avulso</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-white/5 rounded-xl p-3 flex items-center gap-3 opacity-40">
+<div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center text-white/20"><span class="material-symbols-outlined text-sm">add</span></div>
+<p class="text-[9px] font-bold uppercase tracking-widest text-white/20">Vaga</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Venue Card Shortcut -->
+<section class="mt-12">
+<button class="relative w-full h-32 rounded-2xl overflow-hidden group text-left border border-white/5" onclick="window.open('https://maps.google.com?q=Arena+Central+Society+Itaim+Bibi', '_blank')">
+<img alt="Arena Society" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 opacity-60" data-alt="Artificial grass football field at night" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5rTLND6EcZNyU7xAtjScI15-mqg6etzYvOzY5xgi124pcY9P1wDC1FnIiQ7bI9Atvj0Dx8WMO_cD8qe8yJGUgc5YDEsYlDdSvLOyIMHpmtNqLNcU0CG6nXtynERBgoBLWJrg3eChrYPLamo30ewFTm4AfP6VpFPA_RLPxEYiaTUInJHZaxZw_QOcCFvzH6XKSMIo2yudMXXMXuA4tn-4Lg_FJBW8aj-xf4gTLwlGOPHSehJcrOUM1HqUkSD7O3bmWmfrddoctC9o6"/>
+<div class="absolute inset-0 bg-gradient-to-r from-surface via-surface/80 to-transparent"></div>
+<div class="absolute inset-0 p-6 flex flex-col justify-center">
+<span class="text-[9px] font-bold text-primary uppercase tracking-[0.2em] mb-1">Localização</span>
+<h3 class="font-syne font-extrabold text-xl uppercase italic text-on-surface">Arena Central Society</h3>
+<p class="text-xs text-white/60 mb-2">Rua das Olimpíadas, 450 • Itaim Bibi</p>
+<div class="flex items-center gap-1.5 text-[10px] font-bold text-primary uppercase tracking-wider">
+<span>Abrir no Maps</span>
+<span class="material-symbols-outlined text-xs">open_in_new</span>
+</div>
+</div>
+</button>
+</section>
+</main>
+<!-- Participant Footer Actions -->
+<footer class="fixed bottom-0 left-0 w-full p-6 pb-8 bg-gradient-to-t from-surface via-surface/90 to-transparent flex gap-3">
+<button class="flex-1 h-14 bg-surface-container-highest/50 border border-white/10 rounded-2xl flex items-center justify-center gap-3 group active:scale-95 transition-all">
+<span class="material-symbols-outlined text-white/60 group-hover:text-primary transition-colors">share</span>
+<span class="text-white/80 font-bold text-sm uppercase tracking-widest">Compartilhar</span>
+</button>
+<button class="w-14 h-14 bg-surface-container-highest/50 border border-white/10 rounded-2xl flex items-center justify-center active:scale-95 transition-all">
+<span class="material-symbols-outlined text-white/60">info</span>
+</button>
+</footer>
+</body></html>

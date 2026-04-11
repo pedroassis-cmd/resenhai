@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Detalhes da Pelada - PeladaApp</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&amp;family=DM+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-background": "#f1fcf3",
+              "on-primary-fixed": "#00441c",
+              "surface-container-high": "#16221b",
+              "on-surface-variant": "#a3aea5",
+              "surface-container": "#101c16",
+              "on-primary": "#005927",
+              "on-secondary-fixed": "#4c2e00",
+              "surface-variant": "#1b2921",
+              "on-primary-container": "#00290e",
+              "primary-fixed-dim": "#5ae682",
+              "error-dim": "#d53d18",
+              "surface": "#07100b",
+              "on-primary-fixed-variant": "#00642d",
+              "surface-bright": "#202f27",
+              "on-secondary": "#4a2c00",
+              "surface-container-highest": "#1b2921",
+              "secondary": "#f8a010",
+              "tertiary-fixed": "#baa3ff",
+              "secondary-fixed": "#ffc885",
+              "surface-container-lowest": "#000000",
+              "on-tertiary-fixed": "#1d0054",
+              "on-secondary-container": "#fff6f0",
+              "on-error": "#450900",
+              "error-container": "#b92902",
+              "on-tertiary": "#31067e",
+              "on-error-container": "#ffd2c8",
+              "error": "#ff7351",
+              "outline": "#6d7870",
+              "tertiary": "#b299ff",
+              "tertiary-dim": "#a88cfb",
+              "secondary-fixed-dim": "#ffb554",
+              "surface-container-low": "#0b1610",
+              "tertiary-fixed-dim": "#ad92ff",
+              "on-tertiary-fixed-variant": "#41208e",
+              "secondary-dim": "#e79400",
+              "primary": "#69f58f",
+              "on-tertiary-container": "#230062",
+              "secondary-container": "#855300",
+              "outline-variant": "#404a44",
+              "inverse-surface": "#f1fcf3",
+              "inverse-on-surface": "#4d5851",
+              "primary-dim": "#5ae682",
+              "on-secondary-fixed-variant": "#724700",
+              "background": "#07100b",
+              "on-surface": "#f1fcf3",
+              "primary-fixed": "#69f58f",
+              "inverse-primary": "#006e32",
+              "surface-dim": "#07100b",
+              "primary-container": "#1cb85b",
+              "tertiary-container": "#a589f8",
+              "surface-tint": "#69f58f"
+            },
+            fontFamily: {
+              "headline": ["Syne", "sans-serif"],
+              "body": ["DM Sans", "sans-serif"],
+              "label": ["DM Sans", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #07100b;
+            background-image: radial-gradient(#1CB85B15 1px, transparent 1px);
+            background-size: 30px 30px;
+            font-family: 'DM Sans', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-shadow {
+            box-shadow: 0 32px 64px -15px rgba(0,0,0,0.4);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#1B2921]/70 backdrop-blur-xl flex items-center justify-between px-6 py-4 w-full shadow-[0_32px_64px_-15px_rgba(0,0,0,0.4)]">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#1CB85B] active:scale-95 duration-200 cursor-pointer" data-icon="arrow_back">arrow_back</span>
+<h1 class="font-['Syne'] font-extrabold tracking-tighter uppercase text-[#1CB85B] text-lg">Detalhes da Pelada</h1>
+</div>
+<div class="px-3 py-1 bg-[#1CB85B]/20 rounded-full">
+<span class="font-['DM_Sans'] text-[10px] font-bold tracking-widest uppercase text-[#1CB85B]">Confirmado</span>
+</div>
+</header>
+<main class="pt-24 px-6 max-w-2xl mx-auto">
+<!-- Hero Section -->
+<section class="mb-8">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-primary-container/10 rounded-full mb-4">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-primary font-bold text-xs tracking-widest uppercase">VOCÊ ESTÁ CONFIRMADO</span>
+</div>
+<h2 class="font-headline text-4xl font-extrabold tracking-tighter leading-none mb-2">Arena Central - Sábado 18h</h2>
+<p class="text-on-surface-variant font-medium">Sábado, 24 de Agosto • 18:00 - 19:30</p>
+</section>
+<!-- Status Bento Card -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+<div class="bg-surface-container p-6 rounded-xl border-l-4 border-primary shadow-2xl">
+<div class="flex justify-between items-end mb-4">
+<div>
+<p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-1">Capacidade</p>
+<h3 class="font-headline text-3xl font-extrabold">9/14 <span class="text-lg text-on-surface-variant font-normal">jogadores</span></h3>
+</div>
+<div class="text-right">
+<p class="text-secondary text-xs font-bold uppercase tracking-widest">5 Vagas Abertas</p>
+</div>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[64%]"></div>
+</div>
+</div>
+<div class="bg-surface-container-high p-6 rounded-xl flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="location_on">location_on</span>
+</div>
+<div>
+<p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest">Localização</p>
+<p class="font-bold text-on-surface">Arena Central Park, Quadra 03</p>
+</div>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<nav class="flex gap-8 mb-8 overflow-x-auto no-scrollbar">
+<button class="font-headline text-lg font-extrabold text-primary border-b-2 border-primary pb-2 whitespace-nowrap">Escalação</button>
+<button class="font-headline text-lg font-extrabold text-on-surface-variant pb-2 whitespace-nowrap hover:text-on-surface transition-colors">Local</button>
+<button class="font-headline text-lg font-extrabold text-on-surface-variant pb-2 whitespace-nowrap hover:text-on-surface transition-colors">Substitutos</button>
+</nav>
+<!-- Teams Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Team Green -->
+<div class="space-y-4">
+<div class="flex items-center justify-between mb-4 px-2">
+<h4 class="font-headline font-extrabold text-primary tracking-tighter uppercase">TIME VERDE</h4>
+<span class="text-xs font-bold text-on-surface-variant bg-surface-container px-2 py-1 rounded">5 JOGADORES</span>
+</div>
+<div class="space-y-3">
+<div class="bg-surface-container hover:bg-surface-container-highest transition-colors p-3 rounded-xl flex items-center justify-between group">
+<div class="flex items-center gap-3">
+<img alt="" class="w-10 h-10 rounded-full object-cover border-2 border-primary/20" data-alt="Avatar circular de um jogador de futebol" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAT6KGmLGHR76biJ5ziy32nbD6zizme1Li_OZg8-lS61hDGaa2xi7z8JeC_V8nVxq0MsGYatJj2NXEJBcarkctES1Mr1ogdR2rhS3B8KI83Bv18zMBIukfcpmINDQyk-zHWVYnaU6QVBBuAQZaUX-MOZI09sWa_u2v2hVRPVC5R6jfzvJUYz4s6ryqIkgvzwjZat9fMkX841YGeO6iO-EkFmKyiBdfysQCz_mlkT1N6k3_LNtjNaAVLIHR3ATfgSBrnEGRDHO5WZksY"/>
+<div>
+<p class="font-bold text-sm">Ricardo M.</p>
+<span class="text-[10px] bg-primary/10 text-primary px-1.5 py-0.5 rounded font-bold uppercase">G</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container hover:bg-surface-container-highest transition-colors p-3 rounded-xl flex items-center justify-between group">
+<div class="flex items-center gap-3">
+<img alt="" class="w-10 h-10 rounded-full object-cover border-2 border-primary/20" data-alt="Avatar circular de um jogador de futebol" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIo7UZaVpKaMgfRZoNYOPfwuwqLExGMUAyf5Tmy2iM0ndgytQIhgpx7IjVWpdtLUxZpyrUQAjUuNv2DGHv-4RJxYSW4ifcKq4oUDHOBGYQlEfkiBRPZ6E63s6bnBN0ZhQB_z4XpiTDgonP5ZWCcXH89Hl0UnOVMhoikBgzMQnZijZbw2-n8NgHtg9QKT4_jEnP1AtR0CfGLESh4JNK22LDJE-fyhxi1vUJ0re_JqwVi9TKCQ2ptdDpiyWX8f-Pkhk9e2cVnpNRCd_E"/>
+<div>
+<p class="font-bold text-sm">Fabio Silva</p>
+<span class="text-[10px] bg-primary/10 text-primary px-1.5 py-0.5 rounded font-bold uppercase">Z</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container hover:bg-surface-container-highest transition-colors p-3 rounded-xl flex items-center justify-between group">
+<div class="flex items-center gap-3">
+<img alt="" class="w-10 h-10 rounded-full object-cover border-2 border-primary/20" data-alt="Avatar circular de um jogador de futebol" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALZlrywV5e5LoAzU9dGE3eD5yrJkq7zNwAYkTGjsXsnGy2VQBMSoUJuDqjkOGfdl2ooexlvBpdKucGIad5oUY9BUSQF0e8OGzYZQXNjY6b9ykc5HBd4imJ1zgPzWxXiTbHggXjrXVord0lEPRIdxYp8K7qyDO9f_X8VBG5EFtYMQyxhIKHfzuIxN1qByTPDBdpAOUqVUF92cpBhQcVFqPrNWybknNulQyw5NNTM9GoH6AOGM_gmVpu2bK887-_cXZRQhoVPOY9JWTb"/>
+<div>
+<p class="font-bold text-sm">Lucas G.</p>
+<span class="text-[10px] bg-primary/10 text-primary px-1.5 py-0.5 rounded font-bold uppercase">M</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Team White -->
+<div class="space-y-4">
+<div class="flex items-center justify-between mb-4 px-2">
+<h4 class="font-headline font-extrabold text-on-surface tracking-tighter uppercase">TIME BRANCO</h4>
+<span class="text-xs font-bold text-on-surface-variant bg-surface-container px-2 py-1 rounded">4 JOGADORES</span>
+</div>
+<div class="space-y-3">
+<!-- User Participant -->
+<div class="bg-primary/5 ring-1 ring-primary/30 p-3 rounded-xl flex items-center justify-between group">
+<div class="flex items-center gap-3">
+<div class="relative">
+<img alt="" class="w-10 h-10 rounded-full object-cover border-2 border-primary" data-alt="Avatar do usuário Tiago L." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsC7EW1adkArbqtbK_RE1TKIWI-vQ1_bcoRLXw7aIE70RGfmG6XHMicIzdX0kCFQiIp-kmjemWWoMkhyKrLHctjfOfbHE3vSsQ1xHdhUQUtXCvS7wwiH24lr-fBIezT2geixDQR8WG4_K3s2IHvjKffK8A2WEamvYsLxV_GpYOgSe47H0V7YTzjCtOrtsBR-mKAz5cWrEWJgJJK_U7V1MRmEu3b1FhiCqCRBmaROKazK5Xh1kH_GO0UM3rPJiUSJZxXlKIlBk5NNMo"/>
+<div class="absolute -bottom-1 -right-1 bg-primary w-4 h-4 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-[10px] text-on-primary font-black" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<div>
+<p class="font-bold text-sm text-primary">Tiago L. (Você)</p>
+<span class="text-[10px] bg-primary text-on-primary px-1.5 py-0.5 rounded font-bold uppercase">A</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container hover:bg-surface-container-highest transition-colors p-3 rounded-xl flex items-center justify-between group">
+<div class="flex items-center gap-3">
+<img alt="" class="w-10 h-10 rounded-full object-cover border-2 border-white/10" data-alt="Avatar circular de um jogador de futebol" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYhqw9y6Cg9VJj4EtNc8JDCs4EyG5TQL0tCwpOTddLnOfPFyry8Hp0gJxUbYxGMvtZ-auigzMJOukAgOmKo6vkeNyVeIlXOrrYKtNw82dlQYpGzVYpeLlTiqHcl_zyXBVWiPeMWMzuW9iF_6Q-nvsxPBMm3PtTS6Jo3SIyMwZVGqB_Q90ZJRHHHME864pZ5-bdRoi16OtVbUamybL-_n5J92NL2FxbNkLCbRA2zLBaD2IDF2Q5O0IuOyrsYvon9jeuhUMV7RQ2O9GG"/>
+<div>
+<p class="font-bold text-sm">Marcos R.</p>
+<span class="text-[10px] bg-surface-variant text-on-surface-variant px-1.5 py-0.5 rounded font-bold uppercase">Z</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container hover:bg-surface-container-highest transition-colors p-3 rounded-xl flex items-center justify-between group">
+<div class="flex items-center gap-3">
+<img alt="" class="w-10 h-10 rounded-full object-cover border-2 border-white/10" data-alt="Avatar circular de um jogador de futebol" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDI2HIs24-v-QA8yQNpklfTdG7p0b0nIxCIu_0Vb5tgTk6TkmrTiRjiulDcymsO4yFx7I-1a2Jtsrw4TbQ6RqVhv9xUlWcvCN6TS__SBKtFwQRPlQYNMVCPqzU1dfV0E1xuirgS8Ls5ldT0HURh7Cx7tOKYlVVX-kbVHbb_mBUeLnzKg6SqVsB26g4KQ2PPhx3nq8512pLPf9ASzdF9FiD0YZkhG5P2TRonf4oSbUpCOGV3ebZaHT-zxOFoQ8jdv61Dtfu38x457L_N"/>
+<div>
+<p class="font-bold text-sm">André J.</p>
+<span class="text-[10px] bg-surface-variant text-on-surface-variant px-1.5 py-0.5 rounded font-bold uppercase">M</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Action Bar (Shared Component Logic) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-8 pt-4 bg-[#0B1610] rounded-t-[16px]">
+<div class="flex items-center justify-between w-full max-w-2xl gap-4">
+<button class="flex-1 flex items-center justify-center gap-2 bg-primary-container text-on-primary-container h-14 rounded-xl font-headline font-extrabold uppercase tracking-wider active:scale-95 duration-150 transition-all">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+                Compartilhar
+            </button>
+<button class="w-14 h-14 flex items-center justify-center bg-surface-container-highest text-white/60 rounded-xl hover:text-primary active:scale-90 duration-150 transition-all">
+<span class="material-symbols-outlined" data-icon="info">info</span>
+</button>
+</div>
+</nav>
+<!-- Persistent Bottom Nav (Filtered Visibility Check) -->
+<!-- Suppressed due to Transactional Focus and Bottom Action Bar priority -->
+</body></html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&amp;family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-container": "#00290e",
+              "on-surface-variant": "#a3aea5",
+              "primary-dim": "#5ae682",
+              "on-error": "#450900",
+              "surface-container-highest": "#1b2921",
+              "secondary-fixed": "#ffc885",
+              "on-secondary-fixed": "#4c2e00",
+              "inverse-on-surface": "#4d5851",
+              "on-background": "#f1fcf3",
+              "surface-bright": "#202f27",
+              "secondary-fixed-dim": "#ffb554",
+              "error": "#ff7351",
+              "tertiary-fixed-dim": "#ad92ff",
+              "error-container": "#b92902",
+              "secondary-container": "#855300",
+              "on-tertiary": "#31067e",
+              "tertiary-container": "#a589f8",
+              "primary-fixed-dim": "#5ae682",
+              "surface": "#07100b",
+              "surface-container-high": "#16221b",
+              "on-primary": "#005927",
+              "on-tertiary-container": "#230062",
+              "on-secondary-container": "#fff6f0",
+              "surface-container-low": "#0b1610",
+              "on-surface": "#f1fcf3",
+              "on-error-container": "#ffd2c8",
+              "on-primary-fixed": "#00441c",
+              "primary-container": "#1cb85b",
+              "on-primary-fixed-variant": "#00642d",
+              "primary": "#69f58f",
+              "secondary-dim": "#e79400",
+              "surface-variant": "#1b2921",
+              "surface-tint": "#69f58f",
+              "outline": "#6d7870",
+              "secondary": "#f8a010",
+              "inverse-surface": "#f1fcf3",
+              "on-secondary-fixed-variant": "#724700",
+              "on-tertiary-fixed-variant": "#41208e",
+              "tertiary": "#b299ff",
+              "surface-container": "#101c16",
+              "on-secondary": "#4a2c00",
+              "inverse-primary": "#006e32",
+              "error-dim": "#d53d18",
+              "outline-variant": "#404a44",
+              "tertiary-fixed": "#baa3ff",
+              "primary-fixed": "#69f58f",
+              "surface-dim": "#07100b",
+              "background": "#07100b",
+              "on-tertiary-fixed": "#1d0054",
+              "surface-container-lowest": "#000000",
+              "tertiary-dim": "#a88cfb"
+            },
+            fontFamily: {
+              "syne": ["Syne", "sans-serif"],
+              "dm-sans": ["DM Sans", "sans-serif"],
+              "headline": ["Syne"],
+              "body": ["DM Sans"],
+              "label": ["DM Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #07100b;
+            color: #f1fcf3;
+            font-family: 'DM Sans', sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="bg-[#1B2921]/70 backdrop-blur-xl text-[#1CB85B] fixed top-0 sticky z-50 flex justify-between items-center px-6 py-4 w-full">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-primary/20">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="Close up profile photo of a male soccer player" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPxkIHjQTM2-bjpYzK4Qf6_etxBoPDLE7nfXLTbcMAZEeUn0wevby-Ollzkvd0i-7_w9bRLCLzfkuuEMx-r6sTrTxSQfZVUQ7LgLKQXMBMLvMML6ahl5bsKbHk2xqD8mUygVY5m0yStjS8iVtZMLBoqdZSs1hWWGVZt_mzRTYeeq5V9edmVxIku2yzR8xR1zPQURV06k9XWCBcDFpTk1t1nj5LWvRkMlbw7T-zw3uQPGCMiXCzoDb5jDJhF3K-fkPWDqVqS9KPemSO"/>
+</div>
+<span class="font-syne font-extrabold italic text-[#1CB85B] tracking-tighter text-xl">PELADAAPP</span>
+</div>
+<button class="text-[#1CB85B] hover:bg-[#1B2921] transition-colors p-2 rounded-lg active:scale-95 duration-150">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<main class="px-6 pt-8 space-y-10">
+<!-- Welcome Header -->
+<section class="space-y-1">
+<p class="text-on-surface-variant font-medium text-sm">Bem-vindo de volta 👋</p>
+<h1 class="font-syne font-extrabold text-4xl uppercase tracking-tighter text-on-surface">Seu painel</h1>
+</section>
+<!-- Stats Grid 2x2 -->
+<section class="grid grid-cols-2 gap-4">
+<!-- Matches -->
+<div class="bg-surface-container-high rounded-2xl p-5 border-t-4 border-primary relative overflow-hidden">
+<div class="absolute -right-4 -bottom-4 opacity-5">
+<span class="material-symbols-outlined text-8xl" style="font-variation-settings: 'FILL' 1;">sports_soccer</span>
+</div>
+<p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest">Partidas</p>
+<p class="font-syne font-extrabold text-5xl mt-2 text-primary">24</p>
+</div>
+<!-- Goals -->
+<div class="bg-surface-container-high rounded-2xl p-5 border-t-4 border-secondary relative overflow-hidden">
+<div class="absolute -right-4 -bottom-4 opacity-5">
+<span class="material-symbols-outlined text-8xl" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest">Gols</p>
+<p class="font-syne font-extrabold text-5xl mt-2 text-secondary">12</p>
+</div>
+<!-- Assists -->
+<div class="bg-surface-container-high rounded-2xl p-5 border-t-4 border-accent relative overflow-hidden" style="border-top-color: #38BDF8;">
+<div class="absolute -right-4 -bottom-4 opacity-5">
+<span class="material-symbols-outlined text-8xl" style="font-variation-settings: 'FILL' 1;">handshake</span>
+</div>
+<p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest">Assistências</p>
+<p class="font-syne font-extrabold text-5xl mt-2 text-[#38BDF8]">08</p>
+</div>
+<!-- Victories -->
+<div class="bg-surface-container-high rounded-2xl p-5 border-t-4 border-tertiary relative overflow-hidden">
+<div class="absolute -right-4 -bottom-4 opacity-5">
+<span class="material-symbols-outlined text-8xl" style="font-variation-settings: 'FILL' 1;">military_tech</span>
+</div>
+<p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest">Vitórias</p>
+<p class="font-syne font-extrabold text-5xl mt-2 text-tertiary">15</p>
+</div>
+</section>
+<!-- Performance Details (Expanded State Concept) -->
+<section class="bg-surface-container-highest rounded-3xl overflow-hidden">
+<div class="p-6 space-y-6">
+<div class="flex justify-between items-center">
+<h2 class="font-syne font-bold text-xl uppercase tracking-tight">Desempenho Geral</h2>
+<span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold">Top 5% Rank</span>
+</div>
+<!-- Performance Bar Chart Simulation -->
+<div class="flex items-end justify-between h-32 gap-2">
+<div class="flex-1 bg-surface-container h-[40%] rounded-t-lg relative group">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] opacity-0 group-hover:opacity-100 transition-opacity">SEG</div>
+</div>
+<div class="flex-1 bg-surface-container h-[75%] rounded-t-lg relative group">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] opacity-0 group-hover:opacity-100 transition-opacity">TER</div>
+</div>
+<div class="flex-1 bg-primary h-[90%] rounded-t-lg relative group">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] opacity-100 transition-opacity font-bold">QUA</div>
+</div>
+<div class="flex-1 bg-surface-container h-[55%] rounded-t-lg relative group">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] opacity-0 group-hover:opacity-100 transition-opacity">QUI</div>
+</div>
+<div class="flex-1 bg-surface-container h-[30%] rounded-t-lg relative group">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] opacity-0 group-hover:opacity-100 transition-opacity">SEX</div>
+</div>
+<div class="flex-1 bg-secondary h-[85%] rounded-t-lg relative group">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] opacity-100 transition-opacity font-bold">SAB</div>
+</div>
+<div class="flex-1 bg-surface-container h-[20%] rounded-t-lg relative group">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] opacity-0 group-hover:opacity-100 transition-opacity">DOM</div>
+</div>
+</div>
+<!-- Lances Salvos -->
+<div class="pt-4 space-y-4">
+<div class="flex items-center gap-2">
+<span class="text-xl">🎬</span>
+<h3 class="font-syne font-bold text-lg uppercase tracking-tight">Lances salvos</h3>
+</div>
+<div class="flex gap-4 overflow-x-auto pb-2 scrollbar-hide -mx-6 px-6">
+<div class="min-w-[140px] aspect-[9/16] bg-surface-container rounded-2xl overflow-hidden relative border border-outline-variant/20">
+<img alt="Highlight 1" class="w-full h-full object-cover" data-alt="Vertical video frame of a soccer goal" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCS0H8L9O3tsaSwkTr0Y1BD4TViMArFi1P5RG4ArEOoThavQoOrb9BtKbG3mBP9woPK9aE5pblUyGhBuPqdz4eyS8DXQ9DdY6xl46UhTlKddEwCv8Qp8brHWNhqev8_d1vP4rLggEASrpiRnQVS1ZvTG_4tb1ICF_hLur1MYE-V5cEgilYKz_-yujqnqp3mhTSxfCskuDDld3eavs2UzY8SxfX9KLOJO7M07Y1H-hk9g80nDiTpA-ZrF8OWrxci426BskIRv_RpJLXZ"/>
+<div class="absolute bottom-3 left-3 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+<span class="text-[10px] font-bold">1.2k</span>
+</div>
+</div>
+<div class="min-w-[140px] aspect-[9/16] bg-surface-container rounded-2xl overflow-hidden relative border border-outline-variant/20">
+<img alt="Highlight 2" class="w-full h-full object-cover" data-alt="Vertical video frame of a dribbling move" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7t9aksbjIr6UUP4ag6t2wySND4LQpgZZ1KOwXvIb0rnUZWKOyjqN7bYT4Q7doF1KkcDlDMJXmKmU50R5KpD5k5t2ucdG8bCdZNvzH431OPOJsfUpc3W9IJBIr-qNC-osKV959aIHbQNkeFQUSOJcmXnDNov5_CJXzvPZyztxLlr2CSeEQQeRL777z7a9moP0jVdraOx78GCRpuY9VeYctclHN8n1cgU0xJejq3D7Xd-nKgzvfHLhT_tltg4VidPGeVgmu1BSpHT_p"/>
+<div class="absolute bottom-3 left-3 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+<span class="text-[10px] font-bold">856</span>
+</div>
+</div>
+<div class="min-w-[140px] aspect-[9/16] bg-surface-container rounded-2xl overflow-hidden relative border border-outline-variant/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-outline-variant text-4xl">add_circle</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Peladas Passadas Section -->
+<section class="space-y-6">
+<div class="flex justify-between items-end pr-2">
+<h2 class="font-syne font-extrabold text-2xl uppercase tracking-tighter text-on-surface">Peladas passadas</h2>
+<button class="text-primary text-xs font-bold uppercase tracking-widest">Ver tudo</button>
+</div>
+<div class="space-y-4">
+<!-- Match Card 1 (Win) -->
+<div class="bg-surface-container rounded-2xl p-4 flex items-center justify-between group hover:bg-surface-container-high transition-all border-l-4 border-primary/40">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-black text-xs">W</div>
+<div>
+<p class="font-bold text-sm">Arena Gol de Placa</p>
+<p class="text-xs text-on-surface-variant">Ontem • 20:00</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="text-right">
+<p class="font-syne font-extrabold text-xl text-primary">5 - 3</p>
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-tighter text-right">Vitória</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+</div>
+<!-- Match Card 2 (Draw) -->
+<div class="bg-surface-container rounded-2xl p-4 flex items-center justify-between group hover:bg-surface-container-high transition-all border-l-4 border-secondary/40">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center text-secondary font-black text-xs">D</div>
+<div>
+<p class="font-bold text-sm">Society do Vale</p>
+<p class="text-xs text-on-surface-variant">Terça-feira • 19:30</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="text-right">
+<p class="font-syne font-extrabold text-xl text-secondary">2 - 2</p>
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-tighter text-right">Empate</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+</div>
+<!-- Match Card 3 (Loss) -->
+<div class="bg-surface-container rounded-2xl p-4 flex items-center justify-between group hover:bg-surface-container-high transition-all border-l-4 border-error/40">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-error/20 flex items-center justify-center text-error font-black text-xs">L</div>
+<div>
+<p class="font-bold text-sm">Estádio Municipal</p>
+<p class="text-xs text-on-surface-variant">Sábado • 16:00</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="text-right">
+<p class="font-syne font-extrabold text-xl text-error">1 - 4</p>
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-tighter text-right">Derrota</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-[#1B2921]/70 backdrop-blur-2xl z-50 rounded-t-[16px] shadow-[0_-8px_32px_rgba(0,0,0,0.4)]">
+<a class="flex flex-col items-center justify-center text-[#1CB85B] bg-[#1CB85B]/10 rounded-xl py-1 px-4 active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">sports_soccer</span>
+<span class="font-dm-sans text-[10px] font-bold uppercase tracking-widest mt-1">Peladas</span>
+</a>
+<a class="flex flex-col items-center justify-center text-white/40 py-1 px-4 hover:text-[#1CB85B] transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">person_add</span>
+<span class="font-dm-sans text-[10px] font-bold uppercase tracking-widest mt-1">Substituto</span>
+</a>
+<a class="flex flex-col items-center justify-center text-white/40 py-1 px-4 hover:text-[#1CB85B] transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="font-dm-sans text-[10px] font-bold uppercase tracking-widest mt-1">Buscar Jogo</span>
+</a>
+</nav>
+</body></html>

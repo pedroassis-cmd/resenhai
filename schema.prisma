@@ -1,0 +1,763 @@
+// ============================================================
+// PeladaApp — Prisma Schema v3.0
+// Novidades: radar de substitutos, buscar jogo (rede),
+// solicitação de entrada, jogadores buscando partida,
+// dashboard de partida com abas (escalação / local / substituto)
+// ============================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================
+// ENUMS
+// ============================================================
+
+enum AuthProvider {
+  EMAIL
+  GOOGLE
+  APPLE
+}
+
+enum Position {
+  GOALKEEPER
+  DEFENDER
+  MIDFIELDER
+  FORWARD
+  ANY
+}
+
+enum SkillLevel {
+  BEGINNER
+  RECREATIONAL
+  INTERMEDIATE
+  ADVANCED
+  COMPETITIVE
+}
+
+enum GameFormat {
+  FUTSAL_5V5
+  SOCIETY_7V7
+  FIELD_11V11
+  BEACH_SOCCER
+  CUSTOM
+}
+
+enum MatchStatus {
+  DRAFT
+  OPEN
+  CONFIRMED
+  TEAMS_SET
+  IN_PROGRESS
+  FINISHED
+  CANCELLED
+}
+
+enum RsvpStatus {
+  PENDING
+  CONFIRMED
+  DECLINED
+  MAYBE
+  WAITLISTED
+  NO_SHOW
+}
+
+// ── Substituto chamado diretamente pelo radar (fluxo Uber) ──
+enum RadarCallStatus {
+  SENT       // Notificação enviada
+  ACCEPTED   // Jogador aceitou
+  DECLINED   // Jogador recusou
+  EXPIRED    // 30 min sem resposta
+}
+
+// ── Fila automática de espera (fluxo waitlist original) ──
+enum SubstituteStatus {
+  NOTIFIED
+  ACCEPTED
+  DECLINED
+  EXPIRED
+}
+
+// ── Solicitação de entrada via "Buscar Jogo" ──
+enum JoinRequestStatus {
+  PENDING    // Aguardando aprovação do organizador
+  APPROVED   // Organizador aprovou
+  REJECTED   // Organizador recusou
+  CANCELLED  // Solicitante cancelou
+}
+
+enum NotificationType {
+  MATCH_INVITE
+  MATCH_REMINDER_24H
+  MATCH_REMINDER_2H
+  TEAMS_PUBLISHED
+  SUBSTITUTE_NEEDED
+  SUBSTITUTE_CONFIRMED
+  RADAR_CALL_RECEIVED    // Chamado via radar
+  RADAR_CALL_ACCEPTED
+  RSVP_CONFIRMED
+  RSVP_CANCELLED
+  MATCH_CANCELLED
+  JOIN_REQUEST_RECEIVED  // Organizador recebe pedido de entrada
+  JOIN_REQUEST_APPROVED
+  JOIN_REQUEST_REJECTED
+  PLAYER_INVITE_RECEIVED // Convite enviado a jogador buscando
+  ACHIEVEMENT_UNLOCKED
+  POST_MATCH_RATING
+}
+
+enum PlanType {
+  FREE
+  PREMIUM
+  CLUB
+}
+
+enum AchievementType {
+  TOP_SCORER_MONTH
+  NEVER_MISSED
+  BEST_GOALKEEPER
+  FAIR_PLAY
+  VETERAN_50_MATCHES
+  SUBSTITUTE_HERO
+  ORGANIZER_PRO
+}
+
+// ============================================================
+// USER & AUTH
+// ============================================================
+
+model User {
+  id            String       @id @default(cuid())
+  email         String?      @unique
+  emailVerified Boolean      @default(false)
+  passwordHash  String?
+  authProvider  AuthProvider @default(EMAIL)
+  googleId      String?      @unique
+  appleId       String?      @unique
+
+  resetPasswordToken     String?   @unique
+  resetPasswordExpiresAt DateTime?
+
+  phone         String?  @unique
+  phoneVerified Boolean  @default(false)
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
+  lastLoginAt DateTime?
+
+  profile      PlayerProfile?
+  subscription Subscription?
+
+  // Peladas
+  organizedMatches Match[]         @relation("MatchOrganizer")
+  rsvps            Rsvp[]
+
+  // Fila de espera e substitutos (waitlist automático)
+  waitlistEntries WaitlistEntry[]
+  substituteCalls SubstituteCall[]
+
+  // Radar — chamadas manuais recebidas
+  radarCallsReceived RadarCall[] @relation("RadarCallTarget")
+  radarCallsSent     RadarCall[] @relation("RadarCallSender")
+
+  // Buscar jogo — solicitações de entrada
+  joinRequestsSent     JoinRequest[] @relation("JoinRequester")
+
+  // Buscar jogo — modo "buscando partida"
+  seekingProfile SeekingProfile?
+
+  // Conteúdo gerado
+  ratingsGiven      PlayerRating[]   @relation("RatingAuthor")
+  ratingsReceived   PlayerRating[]   @relation("RatingTarget")
+  highlights        Highlight[]
+  guestPlayersAdded GuestPlayer[]    @relation("GuestAdder")
+
+  notifications    Notification[]
+  achievements     UserAchievement[]
+  deviceTokens     DeviceToken[]
+  blockedPlayers   BlockedPlayer[]  @relation("BlockerUser")
+  blockedBy        BlockedPlayer[]  @relation("BlockedUser")
+
+  @@map("users")
+}
+
+model PlayerProfile {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  displayName       String
+  avatarUrl         String?
+  bio               String?
+
+  primaryPosition   Position   @default(MIDFIELDER)
+  secondaryPosition Position?
+
+  skillLevel  SkillLevel @default(RECREATIONAL)
+  skillScore  Float      @default(2.5)
+
+  // Disponibilidade semanal (bitmask dom=1…sab=64)
+  availabilityMask  Int @default(0)
+  maxTravelRadiusKm Int @default(10)
+
+  // Última localização (usada para radar e busca por proximidade)
+  lastKnownLat      Float?
+  lastKnownLng      Float?
+  locationUpdatedAt DateTime?
+
+  // Estatísticas — exibidas no /start
+  totalMatches Int @default(0)
+  totalGoals   Int @default(0)
+  totalAssists Int @default(0)
+  totalWins    Int @default(0)
+  totalNoShows Int @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("player_profiles")
+}
+
+// ============================================================
+// SEEKING PROFILE — jogador buscando partida ("Buscar Jogo")
+// ============================================================
+
+model SeekingProfile {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Visível no feed "Jogadores buscando"
+  isActive  Boolean  @default(true)
+  bio       String?  // Ex: "Goleiro experiente, disponível qualquer dia"
+
+  preferredPosition Position @default(ANY)
+  preferredFormat   GameFormat?
+
+  // Disponibilidade (bitmask, mesmo padrão de PlayerProfile)
+  availabilityMask  Int   @default(0)
+  maxTravelRadiusKm Int   @default(10)
+
+  // Localização para ordenação por proximidade
+  lat Float?
+  lng Float?
+
+  // Convites recebidos de organizadores
+  playerInvites PlayerInvite[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("seeking_profiles")
+}
+
+// ── Convite de organizador para jogador que está buscando partida ──
+model PlayerInvite {
+  id               String @id @default(cuid())
+  matchId          String
+  match            Match  @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  seekingProfileId String
+  seekingProfile   SeekingProfile @relation(fields: [seekingProfileId], references: [id], onDelete: Cascade)
+  invitedByUserId  String
+
+  message  String?
+  sentAt   DateTime @default(now())
+  readAt   DateTime?
+  acceptedAt DateTime?
+  declinedAt DateTime?
+
+  @@unique([matchId, seekingProfileId])
+  @@map("player_invites")
+}
+
+// ── Solicitação de entrada feita pelo jogador via "Buscar Jogo" ──
+model JoinRequest {
+  id          String           @id @default(cuid())
+  matchId     String
+  match       Match            @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  requesterId String
+  requester   User             @relation("JoinRequester", fields: [requesterId], references: [id], onDelete: Cascade)
+
+  status       JoinRequestStatus @default(PENDING)
+  message      String?           // Mensagem opcional do solicitante
+  respondedAt  DateTime?
+  rejectReason String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([matchId, requesterId])
+  @@map("join_requests")
+}
+
+// ============================================================
+// SUBSCRIPTION
+// ============================================================
+
+model Subscription {
+  id               String    @id @default(cuid())
+  userId           String    @unique
+  user             User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  plan             PlanType  @default(FREE)
+  status           String    @default("active")
+  revenueCatId     String?   @unique
+  currentPeriodEnd DateTime?
+  canceledAt       DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("subscriptions")
+}
+
+// ============================================================
+// VENUE
+// ============================================================
+
+model Venue {
+  id            String  @id @default(cuid())
+  name          String
+  address       String
+  city          String
+  state         String
+  lat           Float
+  lng           Float
+
+  hasChangingRoom Boolean @default(false)
+  hasParking      Boolean @default(false)
+  ballIncluded    Boolean @default(false)
+  costPerPlayer   Float?
+
+  googlePlaceId String?  @unique
+  openingHours  String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  matches        Match[]
+  favoriteVenues FavoriteVenue[]
+
+  @@map("venues")
+}
+
+model FavoriteVenue {
+  id        String   @id @default(cuid())
+  userId    String
+  venueId   String
+  createdAt DateTime @default(now())
+
+  venue Venue @relation(fields: [venueId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, venueId])
+  @@map("favorite_venues")
+}
+
+// ============================================================
+// MATCH (PELADA)
+// ============================================================
+
+model Match {
+  id          String @id @default(cuid())
+  organizerId String
+  organizer   User   @relation("MatchOrganizer", fields: [organizerId], references: [id])
+
+  title                String
+  description          String?
+  format               GameFormat  @default(SOCIETY_7V7)
+  status               MatchStatus @default(DRAFT)
+
+  scheduledAt          DateTime
+  estimatedDurationMin Int         @default(60)
+  rsvpDeadline         DateTime?
+
+  totalSlots Int @default(14)
+  teamCount  Int @default(2)
+
+  venueId       String?
+  venue         Venue?  @relation(fields: [venueId], references: [id])
+  customAddress String?
+  customLat     Float?
+  customLng     Float?
+
+  // Convite — link compartilhável
+  inviteCode String @unique @default(cuid())
+
+  // Visível no feed "Buscar Jogo" — partidas abertas
+  isPublic Boolean @default(true)
+
+  // Cancelamento
+  cancelledAt  DateTime?
+  cancelReason String?
+
+  teamsPublishedAt DateTime?
+  finishedAt       DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  rsvps           Rsvp[]
+  teams           Team[]
+  waitlist        WaitlistEntry[]
+  substituteCalls SubstituteCall[]
+  radarCalls      RadarCall[]
+  guestPlayers    GuestPlayer[]
+  joinRequests    JoinRequest[]
+  playerInvites   PlayerInvite[]
+  matchResult     MatchResult?
+  chat            MatchChat?
+
+  @@map("matches")
+}
+
+// ============================================================
+// RSVP
+// ============================================================
+
+model Rsvp {
+  id      String     @id @default(cuid())
+  matchId String
+  match   Match      @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  userId  String
+  user    User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  status            RsvpStatus @default(PENDING)
+  respondedAt       DateTime?
+  cancelledAt       DateTime?
+  cancelReason      String?
+  preferredPosition Position?
+
+  teamId String?
+  team   Team?  @relation(fields: [teamId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([matchId, userId])
+  @@map("rsvps")
+}
+
+// ============================================================
+// GUEST PLAYER (convidado / bot — sem conta no app)
+// ============================================================
+
+model GuestPlayer {
+  id      String @id @default(cuid())
+  matchId String
+  match   Match  @relation(fields: [matchId], references: [id], onDelete: Cascade)
+
+  addedById String
+  addedBy   User   @relation("GuestAdder", fields: [addedById], references: [id])
+
+  name     String
+  position Position @default(MIDFIELDER)
+
+  // Token único para convidar o convidado a baixar o app
+  inviteToken  String    @unique @default(cuid())
+  inviteSentAt DateTime?
+
+  // Quando o convidado baixar o app e criar conta
+  claimedByUserId String?
+  claimedAt       DateTime?
+
+  teamId String?
+  team   Team?  @relation(fields: [teamId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("guest_players")
+}
+
+// ============================================================
+// TEAM
+// ============================================================
+
+model Team {
+  id      String @id @default(cuid())
+  matchId String
+  match   Match  @relation(fields: [matchId], references: [id], onDelete: Cascade)
+
+  name          String
+  colorHex      String?
+  logoUrl       String?
+  avgSkillScore Float?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  rsvps        Rsvp[]
+  teamSlots    TeamSlot[]
+  guestPlayers GuestPlayer[]
+
+  @@map("teams")
+}
+
+model TeamSlot {
+  id     String @id @default(cuid())
+  teamId String
+  team   Team   @relation(fields: [teamId], references: [id], onDelete: Cascade)
+
+  position      Position
+  userId        String?
+  guestPlayerId String?
+
+  @@map("team_slots")
+}
+
+// ============================================================
+// WAITLIST & SUBSTITUTE CALLS (fila automática)
+// ============================================================
+
+model WaitlistEntry {
+  id      String @id @default(cuid())
+  matchId String
+  match   Match  @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  userId  String
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  availablePosition Position @default(ANY)
+  queuePosition     Int
+
+  createdAt DateTime @default(now())
+
+  @@unique([matchId, userId])
+  @@map("waitlist_entries")
+}
+
+model SubstituteCall {
+  id      String @id @default(cuid())
+  matchId String
+  match   Match  @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  userId  String
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  neededPosition Position
+  status         SubstituteStatus @default(NOTIFIED)
+  notifiedAt     DateTime         @default(now())
+  respondedAt    DateTime?
+  expiresAt      DateTime
+
+  createdAt DateTime @default(now())
+
+  @@map("substitute_calls")
+}
+
+// ============================================================
+// RADAR CALL — chamada manual via radar (fluxo Uber)
+// Diferente de SubstituteCall (fila automática):
+// o organizador seleciona um jogador específico no mapa.
+// ============================================================
+
+model RadarCall {
+  id      String @id @default(cuid())
+  matchId String
+  match   Match  @relation(fields: [matchId], references: [id], onDelete: Cascade)
+
+  // Quem chamou (organizador)
+  senderId String
+  sender   User   @relation("RadarCallSender", fields: [senderId], references: [id])
+
+  // Jogador chamado
+  targetId String
+  target   User   @relation("RadarCallTarget", fields: [targetId], references: [id])
+
+  neededPosition Position
+  status         RadarCallStatus @default(SENT)
+
+  // Localização do jogador no momento do chamado
+  targetLat Float?
+  targetLng Float?
+  distanceKm Float?
+
+  sentAt      DateTime  @default(now())
+  respondedAt DateTime?
+  expiresAt   DateTime  // sentAt + 30 min
+
+  createdAt DateTime @default(now())
+
+  @@map("radar_calls")
+}
+
+// ============================================================
+// MATCH RESULT
+// ============================================================
+
+model MatchResult {
+  id      String @id @default(cuid())
+  matchId String @unique
+  match   Match  @relation(fields: [matchId], references: [id], onDelete: Cascade)
+
+  scores     Json @default("[]") // [{teamId, score}]
+  topScorers Json @default("[]") // [{userId, goals}]
+  topAssists Json @default("[]") // [{userId, assists}]
+
+  notes      String?
+  recordedAt DateTime @default(now())
+
+  playerRatings PlayerRating[]
+  highlights    Highlight[]
+
+  @@map("match_results")
+}
+
+// ============================================================
+// HIGHLIGHT (lances salvos — exibidos no /start)
+// ============================================================
+
+model Highlight {
+  id            String      @id @default(cuid())
+  matchResultId String
+  matchResult   MatchResult @relation(fields: [matchResultId], references: [id], onDelete: Cascade)
+
+  savedById String
+  savedBy   User   @relation(fields: [savedById], references: [id], onDelete: Cascade)
+
+  title     String
+  timestamp String?  // Ex: "00:32"
+  videoUrl  String?
+  notes     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("highlights")
+}
+
+// ============================================================
+// PLAYER RATINGS
+// ============================================================
+
+model PlayerRating {
+  id            String      @id @default(cuid())
+  matchResultId String
+  matchResult   MatchResult @relation(fields: [matchResultId], references: [id], onDelete: Cascade)
+
+  authorId String
+  author   User   @relation("RatingAuthor", fields: [authorId], references: [id])
+  targetId String
+  target   User   @relation("RatingTarget", fields: [targetId], references: [id])
+
+  skillScore    Int
+  fairPlayScore Int
+  comment       String?
+
+  createdAt DateTime @default(now())
+
+  @@unique([matchResultId, authorId, targetId])
+  @@map("player_ratings")
+}
+
+// ============================================================
+// ACHIEVEMENTS
+// ============================================================
+
+model Achievement {
+  id          String          @id @default(cuid())
+  type        AchievementType @unique
+  name        String
+  description String
+  iconUrl     String?
+
+  userAchievements UserAchievement[]
+
+  @@map("achievements")
+}
+
+model UserAchievement {
+  id            String      @id @default(cuid())
+  userId        String
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  achievementId String
+  achievement   Achievement @relation(fields: [achievementId], references: [id])
+
+  earnedAt DateTime @default(now())
+
+  @@unique([userId, achievementId])
+  @@map("user_achievements")
+}
+
+// ============================================================
+// CHAT
+// ============================================================
+
+model MatchChat {
+  id      String @id @default(cuid())
+  matchId String @unique
+  match   Match  @relation(fields: [matchId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  messages ChatMessage[]
+
+  @@map("match_chats")
+}
+
+model ChatMessage {
+  id       String    @id @default(cuid())
+  chatId   String
+  chat     MatchChat @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  senderId String
+  content  String
+  sentAt   DateTime  @default(now())
+
+  @@map("chat_messages")
+}
+
+// ============================================================
+// NOTIFICATIONS & DEVICES
+// ============================================================
+
+model Notification {
+  id     String           @id @default(cuid())
+  userId String
+  user   User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  type  NotificationType
+  title String
+  body  String
+  data  Json?
+
+  readAt DateTime?
+  sentAt DateTime  @default(now())
+
+  @@map("notifications")
+}
+
+model DeviceToken {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  token    String  @unique
+  platform String  // "ios" | "android"
+  active   Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("device_tokens")
+}
+
+// ============================================================
+// BLOCKED PLAYERS
+// ============================================================
+
+model BlockedPlayer {
+  id        String @id @default(cuid())
+  blockerId String
+  blocker   User   @relation("BlockerUser", fields: [blockerId], references: [id], onDelete: Cascade)
+  blockedId String
+  blocked   User   @relation("BlockedUser", fields: [blockedId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([blockerId, blockedId])
+  @@map("blocked_players")
+}

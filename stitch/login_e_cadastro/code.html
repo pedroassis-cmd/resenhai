@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&amp;family=DM+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-container": "#00290e",
+              "on-surface-variant": "#a3aea5",
+              "primary-dim": "#5ae682",
+              "on-error": "#450900",
+              "surface-container-highest": "#1b2921",
+              "secondary-fixed": "#ffc885",
+              "on-secondary-fixed": "#4c2e00",
+              "inverse-on-surface": "#4d5851",
+              "on-background": "#f1fcf3",
+              "surface-bright": "#202f27",
+              "secondary-fixed-dim": "#ffb554",
+              "error": "#ff7351",
+              "tertiary-fixed-dim": "#ad92ff",
+              "error-container": "#b92902",
+              "secondary-container": "#855300",
+              "on-tertiary": "#31067e",
+              "tertiary-container": "#a589f8",
+              "primary-fixed-dim": "#5ae682",
+              "surface": "#07100b",
+              "surface-container-high": "#16221b",
+              "on-primary": "#005927",
+              "on-tertiary-container": "#230062",
+              "on-secondary-container": "#fff6f0",
+              "surface-container-low": "#0b1610",
+              "on-surface": "#f1fcf3",
+              "on-error-container": "#ffd2c8",
+              "on-primary-fixed": "#00441c",
+              "primary-container": "#1cb85b",
+              "on-primary-fixed-variant": "#00642d",
+              "primary": "#69f58f",
+              "secondary-dim": "#e79400",
+              "surface-variant": "#1b2921",
+              "surface-tint": "#69f58f",
+              "outline": "#6d7870",
+              "secondary": "#f8a010",
+              "inverse-surface": "#f1fcf3",
+              "on-secondary-fixed-variant": "#724700",
+              "on-tertiary-fixed-variant": "#41208e",
+              "tertiary": "#b299ff",
+              "surface-container": "#101c16",
+              "on-secondary": "#4a2c00",
+              "inverse-primary": "#006e32",
+              "error-dim": "#d53d18",
+              "outline-variant": "#404a44",
+              "tertiary-fixed": "#baa3ff",
+              "primary-fixed": "#69f58f",
+              "surface-dim": "#07100b",
+              "background": "#07100b",
+              "on-tertiary-fixed": "#1d0054",
+              "surface-container-lowest": "#000000",
+              "tertiary-dim": "#a88cfb"
+            },
+            fontFamily: {
+              "syne": ["Syne", "sans-serif"],
+              "dm-sans": ["DM Sans", "sans-serif"],
+              "headline": ["Syne"],
+              "body": ["DM Sans"],
+              "label": ["DM Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .football-grid {
+            background-image: 
+                linear-gradient(to right, rgba(28, 184, 91, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(28, 184, 91, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .pitch-lines {
+            position: absolute;
+            inset: 0;
+            border: 2px solid rgba(28, 184, 91, 0.03);
+            margin: 20px;
+            pointer-events: none;
+        }
+        .pitch-center-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            border: 2px solid rgba(28, 184, 91, 0.03);
+            border-radius: 50%;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container min-h-screen overflow-x-hidden">
+<!-- Background Layer -->
+<div class="fixed inset-0 football-grid z-0">
+<div class="pitch-lines"></div>
+<div class="pitch-center-circle"></div>
+</div>
+<main class="relative z-10 min-h-screen flex flex-col items-center justify-center px-6 py-12">
+<!-- Logo Section -->
+<div class="mb-12 text-center">
+<div class="text-6xl mb-4 animate-bounce">⚽</div>
+<h1 class="text-5xl font-syne font-extrabold tracking-tighter italic uppercase flex items-center justify-center gap-1">
+<span class="text-on-surface">Pelada</span>
+<span class="text-primary-container">App</span>
+</h1>
+</div>
+<!-- Auth Container -->
+<div class="w-full max-w-md bg-surface-container-low rounded-[24px] p-2 shadow-2xl overflow-hidden">
+<!-- Tabs -->
+<div class="flex p-1 bg-surface-container-lowest rounded-[20px] mb-6">
+<button class="flex-1 py-3 text-sm font-bold uppercase tracking-widest text-on-primary-container bg-primary-container rounded-[16px] transition-all duration-300">
+                    Entrar
+                </button>
+<button class="flex-1 py-3 text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-on-surface transition-all duration-300">
+                    Criar conta
+                </button>
+</div>
+<!-- Form -->
+<form class="px-4 pb-6 space-y-5">
+<div class="space-y-1.5">
+<label class="text-xs font-bold uppercase tracking-wider text-on-surface-variant ml-1">E-mail</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant text-xl">mail</span>
+<input class="w-full bg-surface-container-lowest border-none rounded-xl py-4 pl-12 pr-4 text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary-container transition-all" placeholder="seu@email.com" type="email"/>
+</div>
+</div>
+<div class="space-y-1.5">
+<div class="flex justify-between items-end px-1">
+<label class="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Senha</label>
+<a class="text-[10px] font-bold uppercase text-primary hover:text-primary-dim transition-colors" href="#">Esqueceu?</a>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant text-xl">lock</span>
+<input class="w-full bg-surface-container-lowest border-none rounded-xl py-4 pl-12 pr-12 text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary-container transition-all" placeholder="••••••••" type="password"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface" type="button">
+<span class="material-symbols-outlined text-xl">visibility</span>
+</button>
+</div>
+</div>
+<button class="w-full bg-primary-container hover:bg-primary-dim text-on-primary-container font-syne font-extrabold text-lg uppercase tracking-tight py-4 rounded-xl transition-all active:scale-[0.98] shadow-lg shadow-primary-container/20 mt-2" type="submit">
+                    Entrar
+                </button>
+<div class="relative py-4">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-outline-variant opacity-20"></div>
+</div>
+<div class="relative flex justify-center text-xs uppercase tracking-widest font-bold text-on-surface-variant">
+<span class="bg-surface-container-low px-4">Ou continuar com</span>
+</div>
+</div>
+<button class="w-full bg-surface-container-highest hover:bg-surface-bright text-on-surface font-bold py-4 rounded-xl transition-all flex items-center justify-center gap-3 border border-outline-variant/10" type="button">
+<svg class="w-5 h-5" viewbox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="currentColor"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="currentColor"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="currentColor"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="currentColor"></path>
+</svg>
+                    Google
+                </button>
+</form>
+</div>
+<!-- Footer -->
+<footer class="mt-12 text-center space-y-4">
+<p class="text-on-surface-variant text-xs font-medium">
+                Ao entrar, você concorda com nossos
+            </p>
+<div class="flex items-center justify-center gap-6">
+<a class="text-[10px] font-bold uppercase tracking-widest text-on-surface hover:text-primary transition-colors" href="#">Termos de Uso</a>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<a class="text-[10px] font-bold uppercase tracking-widest text-on-surface hover:text-primary transition-colors" href="#">Privacidade</a>
+</div>
+</footer>
+</main>
+<!-- Decorative Corner Elements -->
+<div class="fixed top-0 left-0 w-64 h-64 bg-primary-container/5 blur-[120px] pointer-events-none"></div>
+<div class="fixed bottom-0 right-0 w-64 h-64 bg-secondary/5 blur-[120px] pointer-events-none"></div>
+</body></html>

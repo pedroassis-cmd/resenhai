@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&amp;family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary-container": "#00290e",
+                        "on-surface-variant": "#a3aea5",
+                        "primary-dim": "#5ae682",
+                        "on-error": "#450900",
+                        "surface-container-highest": "#1b2921",
+                        "secondary-fixed": "#ffc885",
+                        "on-secondary-fixed": "#4c2e00",
+                        "inverse-on-surface": "#4d5851",
+                        "on-background": "#f1fcf3",
+                        "surface-bright": "#202f27",
+                        "secondary-fixed-dim": "#ffb554",
+                        "error": "#ff7351",
+                        "tertiary-fixed-dim": "#ad92ff",
+                        "error-container": "#b92902",
+                        "secondary-container": "#855300",
+                        "on-tertiary": "#31067e",
+                        "tertiary-container": "#a589f8",
+                        "primary-fixed-dim": "#5ae682",
+                        "surface": "#07100b",
+                        "surface-container-high": "#16221b",
+                        "on-primary": "#005927",
+                        "on-tertiary-container": "#230062",
+                        "on-secondary-container": "#fff6f0",
+                        "surface-container-low": "#0b1610",
+                        "on-surface": "#f1fcf3",
+                        "on-error-container": "#ffd2c8",
+                        "on-primary-fixed": "#00441c",
+                        "primary-container": "#1cb85b",
+                        "on-primary-fixed-variant": "#00642d",
+                        "primary": "#69f58f",
+                        "secondary-dim": "#e79400",
+                        "surface-variant": "#1b2921",
+                        "surface-tint": "#69f58f",
+                        "outline": "#6d7870",
+                        "secondary": "#f8a010",
+                        "inverse-surface": "#f1fcf3",
+                        "on-secondary-fixed-variant": "#724700",
+                        "on-tertiary-fixed-variant": "#41208e",
+                        "tertiary": "#b299ff",
+                        "surface-container": "#101c16",
+                        "on-secondary": "#4a2c00",
+                        "inverse-primary": "#006e32",
+                        "error-dim": "#d53d18",
+                        "outline-variant": "#404a44",
+                        "tertiary-fixed": "#baa3ff",
+                        "primary-fixed": "#69f58f",
+                        "surface-dim": "#07100b",
+                        "background": "#07100b",
+                        "on-tertiary-fixed": "#1d0054",
+                        "surface-container-lowest": "#000000",
+                        "tertiary-dim": "#a88cfb"
+                    },
+                    fontFamily: {
+                        "syne": ["Syne", "sans-serif"],
+                        "dm-sans": ["DM Sans", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #060F0A;
+            font-family: 'DM Sans', sans-serif;
+        }
+        .font-syne { font-family: 'Syne', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-surface min-h-screen pb-32 overflow-x-hidden">
+<!-- TopAppBar Shell -->
+<header class="bg-[#1B2921]/70 backdrop-blur-xl sticky top-0 z-50 flex justify-between items-center px-6 py-4 w-full">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden border border-outline-variant/20">
+<img class="w-full h-full object-cover" data-alt="User profile avatar close up" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDqNUYvA1_1rrEzY3uRP1B4POprFxCojVzUD4_hL1WcND-jP_xg4GVzrUCgG5WS17JJqPmlZsjizeIkcQrG26XOSeo66OJa6-zbdMct-j1yw1b4W4Xf_JA4fbJ93y32PfUCIWC7Ha9Pu8QaziHY17FAkPFziNR5Wwt1l4ip_FyvaSibt85I5UXwFzOJHPgq2548Yn4IhhMEchOK72vvB_RCOkn-XTBm-a87hlKzhYyV1r1NnGFRf4cy7OEI8joFN59LeczuPusOomk"/>
+</div>
+<h1 class="font-syne font-extrabold italic text-[#1CB85B] tracking-tighter uppercase">PELADAAPP</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-white/60 hover:bg-[#1B2921] transition-colors p-2 rounded-full">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<main class="px-6 pt-8 space-y-8 max-w-2xl mx-auto">
+<!-- Profile Header -->
+<section class="flex flex-col items-start">
+<div class="flex items-end gap-6 mb-4">
+<div class="w-20 h-20 rounded-[24px] bg-surface-container-high flex items-center justify-center overflow-hidden outline outline-4 outline-primary/10">
+<img class="w-full h-full object-cover" data-alt="Large 80px athletic profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDU5jNabihGZqVL2egl2PYgGxI_gVZ_Z9wmYUrS9IcDNZrwbm3rocDlVoK439Hvle0BPjz903KZ55jnYJxAIHdB1kxX0RdemjBgo97uvMiJxMt_7YOU8FM9oTOi6_LRaOm0CDB3FwvHqvL_c6dbr5aPUhj5oOzqMnG6QbZTuIapMmh5-6oUpW34LDyTOvy28O_YBcMTStslVYIEb4p1wkUEcB_TVwFnZMJU3QAXBP6c8GonNi6X9dafHoU5iIV_Glw22qVw3z9vVg2t"/>
+</div>
+<div class="pb-1">
+<h2 class="font-syne font-extrabold text-3xl text-primary-fixed leading-none tracking-tighter uppercase">BRUNO SILVA</h2>
+<p class="text-on-surface-variant text-sm mt-1">Sempre pronto pro próximo racha.</p>
+</div>
+</div>
+<!-- Stats Badges -->
+<div class="flex flex-wrap gap-2 mt-4">
+<span class="bg-surface-container-high px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 border border-outline-variant/10">
+<span class="material-symbols-outlined text-[16px] text-primary">sports_soccer</span> ATACANTE
+                </span>
+<span class="bg-surface-container-high px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 border border-outline-variant/10">
+<span class="material-symbols-outlined text-[16px] text-secondary">trending_up</span> NÍVEL 12
+                </span>
+<span class="bg-surface-container-high px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 border border-outline-variant/10">
+<span class="material-symbols-outlined text-[16px] text-secondary" style="font-variation-settings: 'FILL' 1;">star</span> 4.8
+                </span>
+</div>
+<div class="mt-6 w-full">
+<button class="w-full bg-outline-variant/20 py-3 rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-outline-variant/40 transition-all active:scale-95">
+                    Editar Perfil
+                </button>
+</div>
+</section>
+<!-- Status Card (Buscando Partida) -->
+<section>
+<div class="bg-primary/10 border border-primary/20 p-6 rounded-[20px] flex items-center justify-between backdrop-blur-sm">
+<div class="space-y-1">
+<h3 class="font-syne font-extrabold text-primary text-xl tracking-tight uppercase italic">Buscando Partida</h3>
+<p class="text-on-surface-variant text-xs font-medium">Disponível para convites de substituição</p>
+</div>
+<div class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-14 h-8 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-primary"></div>
+</div>
+</div>
+</section>
+<!-- Achievements Grid -->
+<section>
+<div class="flex justify-between items-end mb-4 px-1">
+<h3 class="font-syne font-extrabold text-xl uppercase tracking-tighter">Conquistas</h3>
+<span class="text-primary text-xs font-bold tracking-widest uppercase">Ver Todas</span>
+</div>
+<div class="grid grid-cols-3 gap-4">
+<div class="bg-surface-container-low p-4 rounded-2xl flex flex-col items-center text-center gap-2 border border-outline-variant/5">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-1">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">military_tech</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Artilheiro</span>
+</div>
+<div class="bg-surface-container-low p-4 rounded-2xl flex flex-col items-center text-center gap-2 border border-outline-variant/5">
+<div class="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center text-secondary mb-1">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Confiável</span>
+</div>
+<div class="bg-surface-container-low p-4 rounded-2xl flex flex-col items-center text-center gap-2 border border-outline-variant/5">
+<div class="w-12 h-12 rounded-full bg-tertiary/10 flex items-center justify-center text-tertiary mb-1">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">history_edu</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Veterano</span>
+</div>
+</div>
+</section>
+<!-- Settings Links -->
+<section class="bg-surface-container rounded-[20px] overflow-hidden">
+<div class="flex flex-col">
+<a class="flex items-center justify-between p-5 hover:bg-surface-variant transition-colors group" href="#">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">settings</span>
+<span class="text-sm font-bold uppercase tracking-widest">Configurações da Conta</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-5 hover:bg-surface-variant transition-colors group" href="#">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">history</span>
+<span class="text-sm font-bold uppercase tracking-widest">Histórico de Jogos</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-5 hover:bg-surface-variant transition-colors group" href="#">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">help</span>
+<span class="text-sm font-bold uppercase tracking-widest">Suporte e FAQ</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</a>
+<button class="flex items-center justify-between p-5 hover:bg-error/10 transition-colors w-full text-left group">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-error-dim">logout</span>
+<span class="text-sm font-bold uppercase tracking-widest text-error-dim">Sair</span>
+</div>
+</button>
+</div>
+</section>
+</main>
+<!-- BottomNavBar Shell -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-[#1B2921]/70 backdrop-blur-2xl z-50 rounded-t-[16px] shadow-[0_-8px_32px_rgba(0,0,0,0.4)]">
+<a class="flex flex-col items-center justify-center text-white/40 py-1 px-4 hover:text-[#1CB85B] transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">sports_soccer</span>
+<span class="font-dm-sans text-[10px] font-bold uppercase tracking-widest mt-1">Peladas</span>
+</a>
+<a class="flex flex-col items-center justify-center text-white/40 py-1 px-4 hover:text-[#1CB85B] transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">person_add</span>
+<span class="font-dm-sans text-[10px] font-bold uppercase tracking-widest mt-1">Substituto</span>
+</a>
+<a class="flex flex-col items-center justify-center text-white/40 py-1 px-4 hover:text-[#1CB85B] transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="font-dm-sans text-[10px] font-bold uppercase tracking-widest mt-1">Buscar Jogo</span>
+</a>
+<!-- Explicit Semantic Mapping: Profile isn't in JSON list but logically active here -->
+<a class="flex flex-col items-center justify-center text-[#1CB85B] bg-[#1CB85B]/10 rounded-xl py-1 px-4 active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-dm-sans text-[10px] font-bold uppercase tracking-widest mt-1">Perfil</span>
+</a>
+</nav>
+</body></html>

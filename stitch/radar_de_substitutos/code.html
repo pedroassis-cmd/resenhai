@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&amp;family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-container": "#00290e",
+              "on-surface-variant": "#a3aea5",
+              "primary-dim": "#5ae682",
+              "on-error": "#450900",
+              "surface-container-highest": "#1b2921",
+              "secondary-fixed": "#ffc885",
+              "on-secondary-fixed": "#4c2e00",
+              "inverse-on-surface": "#4d5851",
+              "on-background": "#f1fcf3",
+              "surface-bright": "#202f27",
+              "secondary-fixed-dim": "#ffb554",
+              "error": "#ff7351",
+              "tertiary-fixed-dim": "#ad92ff",
+              "error-container": "#b92902",
+              "secondary-container": "#855300",
+              "on-tertiary": "#31067e",
+              "tertiary-container": "#a589f8",
+              "primary-fixed-dim": "#5ae682",
+              "surface": "#07100b",
+              "surface-container-high": "#16221b",
+              "on-primary": "#005927",
+              "on-tertiary-container": "#230062",
+              "on-secondary-container": "#fff6f0",
+              "surface-container-low": "#0b1610",
+              "on-surface": "#f1fcf3",
+              "on-error-container": "#ffd2c8",
+              "on-primary-fixed": "#00441c",
+              "primary-container": "#1cb85b",
+              "on-primary-fixed-variant": "#00642d",
+              "primary": "#69f58f",
+              "secondary-dim": "#e79400",
+              "surface-variant": "#1b2921",
+              "surface-tint": "#69f58f",
+              "outline": "#6d7870",
+              "secondary": "#f8a010",
+              "inverse-surface": "#f1fcf3",
+              "on-secondary-fixed-variant": "#724700",
+              "on-tertiary-fixed-variant": "#41208e",
+              "tertiary": "#b299ff",
+              "surface-container": "#101c16",
+              "on-secondary": "#4a2c00",
+              "inverse-primary": "#006e32",
+              "error-dim": "#d53d18",
+              "outline-variant": "#404a44",
+              "tertiary-fixed": "#baa3ff",
+              "primary-fixed": "#69f58f",
+              "surface-dim": "#07100b",
+              "background": "#07100b",
+              "on-tertiary-fixed": "#1d0054",
+              "surface-container-lowest": "#000000",
+              "tertiary-dim": "#a88cfb"
+            },
+            fontFamily: {
+              "syne": ["Syne", "sans-serif"],
+              "dm-sans": ["DM Sans", "sans-serif"],
+              "headline": ["Syne"],
+              "body": ["DM Sans"],
+              "label": ["DM Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .radar-scan {
+            background: conic-gradient(from 0deg, rgba(28, 184, 91, 0.4) 0deg, rgba(28, 184, 91, 0) 90deg);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-[#1B2921]/70 backdrop-blur-xl text-white/60 sticky top-0 z-50 flex justify-between items-center px-6 py-4 w-full">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center overflow-hidden border border-outline-variant/20">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="User profile avatar image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCU14RhZXfq2tfWjCSt8p_bTpGz_8PkQoDeL0m5ZXyB0vSPEdKUMdI2JG-vKF4m6DgW2bJR0FgH6yAdYtU2K02tAEj_NlfwJXMDwO3dvz8l3iSep26IlctSHWCXdS8Lmm7LKckvHEYWx4vZq5-ooRu7aFoSLZBAB8caLf9sxmocZSji1LsAWtmM4u7AT_p8L8Jr5nrwq9AZyrsoIMv5-hHw6L9WOMrPBX4GAR_nvanuDFHZH7p0WxTcbSA6Rk3ausoi4wT4iB6GDsd4"/>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase tracking-widest font-bold text-primary">Radar de jogadores</span>
+<h1 class="font-syne font-extrabold italic text-[#1CB85B] tracking-tighter text-xl uppercase leading-none">PELADAAPP</h1>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-[#1CB85B] hover:bg-[#1B2921] transition-colors p-2 rounded-full">notifications</button>
+</div>
+</header>
+<main class="flex-1 px-6 pt-4 pb-32 max-w-4xl mx-auto w-full">
+<!-- Header Section -->
+<div class="mb-8">
+<h2 class="font-syne font-extrabold text-4xl uppercase tracking-tighter text-on-surface">Substituto</h2>
+<p class="text-on-surface-variant text-sm mt-1">Buscando jogadores disponíveis em um raio de 5km</p>
+</div>
+<!-- Position Filter Pills -->
+<div class="flex gap-3 overflow-x-auto pb-6 no-scrollbar">
+<button class="whitespace-nowrap px-6 py-2 rounded-full bg-primary-container text-on-primary-container font-bold text-xs uppercase tracking-widest">Todos</button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-bold text-xs uppercase tracking-widest hover:bg-surface-bright transition-colors">Goleiro</button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-bold text-xs uppercase tracking-widest hover:bg-surface-bright transition-colors">Zagueiro</button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-bold text-xs uppercase tracking-widest hover:bg-surface-bright transition-colors">Meia</button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-bold text-xs uppercase tracking-widest hover:bg-surface-bright transition-colors">Atacante</button>
+</div>
+<!-- Hero Radar Element -->
+<div class="relative w-full aspect-square max-w-[400px] mx-auto mb-10 flex items-center justify-center">
+<!-- Concentric Rings -->
+<div class="absolute inset-0 border border-primary/10 rounded-full scale-[1]"></div>
+<div class="absolute inset-0 border border-primary/10 rounded-full scale-[0.75]"></div>
+<div class="absolute inset-0 border border-primary/10 rounded-full scale-[0.5]"></div>
+<div class="absolute inset-0 border border-primary/10 rounded-full scale-[0.25]"></div>
+<!-- Crosshairs -->
+<div class="absolute top-0 bottom-0 left-1/2 w-[1px] bg-primary/10"></div>
+<div class="absolute left-0 right-0 top-1/2 h-[1px] bg-primary/10"></div>
+<!-- Rotating Scan Line (Conceptual visual via CSS) -->
+<div class="absolute inset-0 radar-scan rounded-full"></div>
+<!-- Central Point (You) -->
+<div class="relative z-10 w-4 h-4 bg-primary rounded-full shadow-[0_0_15px_rgba(105,245,143,0.6)] animate-pulse"></div>
+<!-- Player Dots (Static for UI layout) -->
+<div class="absolute top-[20%] left-[30%] w-3 h-3 bg-secondary rounded-full shadow-[0_0_10px_rgba(248,160,16,0.4)]" title="GK - João"></div>
+<div class="absolute top-[45%] right-[25%] w-3 h-3 bg-primary rounded-full shadow-[0_0_10px_rgba(105,245,143,0.4)]" title="FW - Marcos"></div>
+<div class="absolute bottom-[20%] left-[40%] w-3 h-3 bg-tertiary rounded-full shadow-[0_0_10px_rgba(178,153,255,0.4)]" title="MF - Ricardo"></div>
+<div class="absolute top-[65%] left-[15%] w-3 h-3 bg-primary rounded-full shadow-[0_0_10px_rgba(105,245,143,0.4)]" title="FW - André"></div>
+<div class="absolute bottom-[35%] right-[15%] w-3 h-3 bg-secondary rounded-full shadow-[0_0_10px_rgba(248,160,16,0.4)]" title="GK - Bruno"></div>
+</div>
+<!-- Selected Player Card -->
+<div class="bg-surface-container rounded-2xl p-6 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4">
+<span class="bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border border-primary/20">A 1.2 KM</span>
+</div>
+<div class="flex items-start gap-6">
+<div class="relative">
+<div class="w-20 h-20 rounded-2xl bg-surface-container-highest overflow-hidden border border-outline-variant/30">
+<img alt="Player" class="w-full h-full object-cover" data-alt="Portrait of a soccer player smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDllLK56gh6ovLCEc6QKYFEkH52wcvANe_hD8-Kj1bciG4g1g07VTuKHYHxju7Jl9xvzSJu5CkBHioFsTCS8xPGrESYP4tCNLmoSyEkQCpStTWeCwnABS4c27K1jOwuN0cCEsOi7dJI1VeSMQy3QCkWRaAVmUO0qxW9rK6iv9cOkcZvnXGpf-rSmh2GNr4-LrLCM1HbwNVwPLBW70wd-Oa_sReTlB1EXeu-7JUlv9iECC-ebLhqGk_lnwQiqjkeeS6v1NFBwaSK6EH5"/>
+</div>
+<div class="absolute -bottom-2 -right-2 bg-primary w-8 h-8 rounded-lg flex items-center justify-center text-on-primary-container font-syne font-bold">
+                        92
+                    </div>
+</div>
+<div class="flex-1">
+<h3 class="font-syne font-extrabold text-2xl uppercase tracking-tight text-on-surface leading-none">MARCOS SILVA</h3>
+<p class="text-on-surface-variant font-medium mt-1">Atacante • Disponível agora</p>
+<div class="mt-4 flex flex-wrap gap-4 text-xs font-bold uppercase tracking-widest text-on-surface/60">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">star</span>
+                            4.9 (42 jogos)
+                        </div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">check_circle</span>
+                            Pontual
+                        </div>
+</div>
+</div>
+</div>
+<div class="mt-8">
+<button class="w-full bg-primary-container text-on-primary-container py-4 rounded-xl font-syne font-extrabold text-lg uppercase tracking-tight flex items-center justify-center gap-2 active:scale-[0.98] transition-all hover:bg-primary-dim">
+<span class="material-symbols-outlined">bolt</span>
+                    Chamar para o jogo
+                </button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full bg-[#1B2921]/70 backdrop-blur-2xl flex justify-around items-center px-4 pb-6 pt-3 z-50 rounded-t-[16px] shadow-[0_-8px_32px_rgba(0,0,0,0.4)]">
+<a class="flex flex-col items-center justify-center text-white/40 py-1 px-4 hover:text-[#1CB85B] transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">sports_soccer</span>
+<span class="font-dm-sans text-[10px] font-bold uppercase tracking-widest mt-1">Peladas</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#1CB85B] bg-[#1CB85B]/10 rounded-xl py-1 px-4 active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person_add</span>
+<span class="font-dm-sans text-[10px] font-bold uppercase tracking-widest mt-1">Substituto</span>
+</a>
+<a class="flex flex-col items-center justify-center text-white/40 py-1 px-4 hover:text-[#1CB85B] transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="font-dm-sans text-[10px] font-bold uppercase tracking-widest mt-1">Buscar Jogo</span>
+</a>
+</nav>
+</body></html>
